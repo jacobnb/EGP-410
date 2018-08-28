@@ -1,3 +1,6 @@
+# Student Version
+Code modified and accidentally obfuscated by Jacob B.
+
 # EGP-410
 Template projects for base code for EGP 410 assignments.
 
@@ -10,3 +13,4 @@ Template projects for base code for EGP 410 assignments.
    * steering
 
 Building instructions are left up to the student. 
+
