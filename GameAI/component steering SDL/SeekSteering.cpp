@@ -23,6 +23,11 @@ SeekSteering::SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, con
 	setTargetLoc(targetLoc);
 }
 
+//int SeekSteering::testMe(const int value)
+//{
+//	return value;
+//}
+
 Steering* SeekSteering::getSteering()
 {
 	Vector2D diff;
@@ -46,6 +51,7 @@ Steering* SeekSteering::getSteering()
 		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
 	}
 
+	//this is the cheat
 	float velocityDirection = atan2(diff.getY(), diff.getX()) + 0.5*(atan(1) * 4); //PI = atan(1)*4
 	pOwner->getPositionComponent()->setFacing(velocityDirection);
 
