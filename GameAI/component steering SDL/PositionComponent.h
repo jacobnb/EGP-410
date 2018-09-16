@@ -25,7 +25,7 @@ public:
 	const Vector2D& getPosition() const { return mData.pos; };
 	void setPosition(const Vector2D& pos) { mData.pos = pos; wrapCoords(); };
 	void modPosition(const Vector2D& mod) { mData.pos += mod; wrapCoords(); };
-	float getFacing() const { return mData.facing; };
+	float getFacing() const { return fmod(mData.facing, 2 * atan(1) * 4);};
 	void setFacing(float facing) { mData.facing = facing; };
 	void modFacing(float mod) { mData.facing += mod; };
 	const PositionData& getData() const { return mData; };

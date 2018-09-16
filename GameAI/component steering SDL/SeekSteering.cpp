@@ -51,19 +51,32 @@ Steering* SeekSteering::getSteering()
 		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
 	}
 
-	//this is the cheat
-	float velocityDirection = atan2(diff.getY(), diff.getX()) + 0.5*(atan(1) * 4); //PI = atan(1)*4
-	pOwner->getPositionComponent()->setFacing(velocityDirection);
-
 	diff.normalize();
 	diff *= pOwner->getMaxAcc();
 
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	data.acc = diff;
+	float pi = (atan(1) * 4);
 	//Set rotation here.
-	//data.rotVel = 0.0f;
+	//this is where we want it to go.
+	float velocityDirection = atan2(diff.getY(), diff.getX());// keep range positive. //PI = atan(1)*4
+	/*if (velocityDirection < 0) {
+		velocityDirection += 2 * pi;
+	}*/
+	float currentDirection = pOwner->getFacing();
+	/*if (currentDirection < 0) {
+		currentDirection += 2 * pi;
+	}*/
+	std::cout << "VelDir: " << velocityDirection << " CurDir: " << currentDirection << " diff: " << (velocityDirection - currentDirection) + 2 * atan(1) * 4 << std::endl;
+	data.rotVel = velocityDirection - currentDirection;// (velocityDirection - currentDirection);// -(atan(1) * 4); //adjust range back.
 
-
+	if (velocityDirection > currentDirection) {
+		data.rotVel = 2;
+	}
+	else {
+		data.rotVel = -2;
+	}
+	std::cout << data.rotVel << std::endl;
 	this->mData = data;
 	return this;
 }
