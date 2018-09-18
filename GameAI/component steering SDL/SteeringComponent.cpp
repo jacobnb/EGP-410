@@ -1,7 +1,7 @@
 #include "ComponentManager.h"
 #include "SteeringComponent.h"
 #include "SeekSteering.h"
-
+#include "WanderSteering.h"
 SteeringComponent::SteeringComponent(const ComponentID& id, const ComponentID& physicsComponentID) 
 	:Component(id)
 	, mPhysicsComponentID(physicsComponentID)
@@ -43,6 +43,8 @@ void SteeringComponent::setData(const SteeringData& data)
 		}
 		case Steering::FLEE:
 		{
+			//cleanup old steering - todo: check for already existing steering and reuse if possible
+			delete mpSteering;
 			mpSteering = new SeekSteering(data.ownerID, data.targetLoc, data.targetID, true);
 			break;
 		}
@@ -52,6 +54,9 @@ void SteeringComponent::setData(const SteeringData& data)
 		}
 		case Steering::WANDER:
 		{
+			//cleanup old steering - todo: check for already existing steering and reuse if possible
+			delete mpSteering;
+			mpSteering = new WanderSteering(data.ownerID, data.targetLoc, data.targetID);
 			break;
 		}
 		case Steering::FACE:
