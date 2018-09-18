@@ -8,4 +8,6 @@ public:
 	static int testMe(const int value);
 protected:
 	virtual Steering* getSteering();
+private:
+	float getRotation(float velocityDirection, float currentDirection);
 };

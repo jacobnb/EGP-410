@@ -58,20 +58,28 @@ Steering* SeekSteering::getSteering()
 
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	data.acc = diff;
-	const float pi = (atan(1) * 4);
-	float velocityDirection = atan2(diff.getY(), diff.getX());// keep range positive. //PI = atan(1)*4
+	
+	//find rotation velocity
+	float velocityDirection = atan2(diff.getY(), diff.getX());
 	float currentDirection = pOwner->getFacing();
-	//std::cout << "VelDir: " << velocityDirection << " CurDir: " << currentDirection << " diff: " << (velocityDirection - currentDirection) + 2 * atan(1) * 4 << std::endl;
+	float rotation = getRotation(velocityDirection, currentDirection);
+	
+	data.rotVel = rotation*2;
+	//std::cout << data.rotVel << std::endl;
+	this->mData = data;
+	return this;
+}
+
+float SeekSteering::getRotation(float velocityDirection, float currentDirection)
+{
 	float rotation = velocityDirection - currentDirection;
+	const float pi = (atan(1) * 4);
 	if (rotation > pi) {
 		rotation -= 2 * pi;
 	}
 	else if (rotation < -pi) {
 		rotation += 2 * pi;
 	}
-	data.rotVel = 2*rotation;
-	//std::cout << data.rotVel << std::endl;
-	this->mData = data;
-	return this;
+	return rotation;
 }
 

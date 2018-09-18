@@ -10,8 +10,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steering", "steering.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeanLib", "..\..\DeanLib\DeanLib.vcxproj", "{DB900E08-5331-46D6-B450-6775A2C7C856}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steeringUnitTests", "..\steeringUnitTests\steeringUnitTests.vcxproj", "{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -36,14 +34,6 @@ Global
 		{DB900E08-5331-46D6-B450-6775A2C7C856}.Release|Win32.Deploy.0 = Release|Win32
 		{DB900E08-5331-46D6-B450-6775A2C7C856}.Release|x64.ActiveCfg = Release|x64
 		{DB900E08-5331-46D6-B450-6775A2C7C856}.Release|x64.Build.0 = Release|x64
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Debug|Win32.ActiveCfg = Debug|Win32
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Debug|Win32.Build.0 = Debug|Win32
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Debug|x64.ActiveCfg = Debug|x64
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Debug|x64.Build.0 = Debug|x64
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Release|Win32.ActiveCfg = Release|Win32
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Release|Win32.Build.0 = Release|Win32
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Release|x64.ActiveCfg = Release|x64
-		{46A9AB54-CBE8-42DA-A64C-08F41FD34B47}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
