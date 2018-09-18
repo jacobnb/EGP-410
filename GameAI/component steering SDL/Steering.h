@@ -18,7 +18,9 @@ public:
 		INVALID_TYPE = -1,
 		SEEK,
 		FLEE,
-		ARRIVE
+		ARRIVE,
+		WANDER,
+		FACE
 	};
 
 	//constructors and destructors
@@ -34,6 +36,8 @@ public:
 	//void setData(const PhysicsData& data) { mData = data; };
 	const PhysicsData& getData() const { return mData; };
 	void update();
+
+	
 protected:
 	SteeringType mType;
 	Vector2D mTargetLoc;
@@ -42,5 +46,6 @@ protected:
 	PhysicsData mData;
 
 	virtual Steering* getSteering() { return this; };//overridden by sub-classes
-
+	//helpers
+	float getRotation(float velocityDirection, float currentDirection);
 };

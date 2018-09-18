@@ -50,6 +50,14 @@ void SteeringComponent::setData(const SteeringData& data)
 		{
 			break;
 		}
+		case Steering::WANDER:
+		{
+			break;
+		}
+		case Steering::FACE:
+		{
+			break;
+		}
 		default:
 		{
 
