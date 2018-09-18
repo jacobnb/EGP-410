@@ -23,10 +23,12 @@ SeekSteering::SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, con
 	setTargetLoc(targetLoc);
 }
 
-//int SeekSteering::testMe(const int value)
-//{
-//	return value;
-//}
+int SeekSteering::testMe(const int value)
+{
+	return value;
+}
+
+
 
 Steering* SeekSteering::getSteering()
 {

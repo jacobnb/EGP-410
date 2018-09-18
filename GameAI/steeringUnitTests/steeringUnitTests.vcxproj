@@ -98,8 +98,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);..\..\DeanLib\lib;..\..\external libs\SDL2\SDL\lib\win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Color.obj;Component.obj;ComponentManager.obj;Font.obj;Game.obj;GameMessage.obj;GameMessageManager.obj;GraphicsBuffer.obj;GraphicsBufferManager.obj;GraphicsSystem.obj;main.obj;PhysicsComponent.obj;PlayerMoveToMessage.obj;PositionComponent.obj;Renderer.obj;SeekSteering.obj;SPrite.obj;Spritemanager.obj;Steering.obj;SteeringComponent.obj;Unit.obj;UnitManager.obj;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;DeanLibDebug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);..\..\DeanLib\lib;..\..\external libs\SDL2\SDL\lib\win32;..\component steering SDL\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>steering.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;DeanLibDebug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
