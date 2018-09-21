@@ -69,27 +69,3 @@ Steering* SeekSteering::getSteering()
 	this->mData = data;
 	return this;
 }
-
-/*
-24 # 1. Calculate the target to delegate to face
-25 26 # Update the wander orientation 
-27 wanderOrientation += randomBinomial() * wanderRate
-
-28 29 # Calculate the combined target orientation 
-30 targetOrientation = wanderOrientation + 
-31 character.orientation
-
-32 33 # Calculate the center of the wander circle 
-34 target = character.position + 
-35 wanderOffset * character.orientation.asVector()
-
-36 37 # Calculate the target location 
-8 target += wanderRadius * targetOrientation.asVector()
-
-39 40 # 2. Delegate to face 
-41 steering = Face.getSteering()
-42 43 # 3. Now set the linear acceleration to be at full 
-44 # acceleration in the direction of the orientation 
-45 steering.linear = maxAcceleration * 
-46 character.orientation.asVector()
-47*/
