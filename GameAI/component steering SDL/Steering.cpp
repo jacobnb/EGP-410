@@ -10,9 +10,9 @@ void Steering::update()
 	}
 }
 
-float Steering::getRotation(float velocityDirection, float currentDirection)
+float Steering::getRotation(float targetDirection, float currentDirection)
 {
-	float rotation = velocityDirection - currentDirection;
+	float rotation = targetDirection - currentDirection;
 	const float pi = (atan(1) * 4);
 	//might have a problem if rotation is more than 2Pi
 	if (rotation > pi) {
