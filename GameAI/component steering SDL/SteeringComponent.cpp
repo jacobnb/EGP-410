@@ -56,7 +56,8 @@ void SteeringComponent::setData(const SteeringData& data)
 		{
 			//cleanup old steering - todo: check for already existing steering and reuse if possible
 			delete mpSteering;
-			mpSteering = new WanderSteering(data.ownerID, data.targetLoc, data.targetID);
+			float radius = 100.0f;
+			mpSteering = new WanderSteering(data.ownerID, radius);
 			break;
 		}
 		case Steering::FACE:

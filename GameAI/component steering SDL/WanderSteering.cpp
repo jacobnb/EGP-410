@@ -5,37 +5,23 @@
 #include "UnitManager.h"
 #include "Unit.h"
 
-WanderSteering::WanderSteering(const UnitID & ownerID, const Vector2D & targetLoc, const UnitID & targetID)
+
+WanderSteering::WanderSteering(const UnitID & ownerID, const float & radius)
 {
 	mType = Steering::WANDER; //not sure this is neccessary
 	setOwnerID(ownerID);
-	setTargetID(targetID);
-	setTargetLoc(targetLoc);
+	mWanderRadius = radius;
 }
 
 Steering * WanderSteering::getSteering()
 {
 	Vector2D diff;
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
-	//are we seeking a location or a unit?
 
-	if (mTargetID != INVALID_UNIT_ID)
-	{
-		//seeking unit
-		Unit* pTarget = gpGame->getUnitManager()->getUnit(mTargetID);
-		assert(pTarget != NULL);
-		mTargetLoc = pTarget->getPositionComponent()->getPosition();
-	}
 
-	if (mType == Steering::SEEK)
-	{
-		diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
-	}
-	else
-	{
-		diff = pOwner->getPositionComponent()->getPosition() - mTargetLoc;
-	}
-
+	mTargetLoc = getTarget();
+	//this is all seekSteering
+	diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
 	diff.normalize();
 	diff *= pOwner->getMaxAcc();
 
@@ -51,4 +37,20 @@ Steering * WanderSteering::getSteering()
 	//std::cout << data.rotVel << std::endl;
 	this->mData = data;
 	return this;
+}
+
+Vector2D WanderSteering::getTarget()
+{
+	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
+	float wanderRadius = mWanderRadius;
+	float wanderOrientation = pOwner->getFacing();
+	auto maxAcceleration = pOwner->getMaxAcc();
+	wanderOrientation +=  genRandomBinomial()* mWanderRate;
+	auto charOrientation = Vector2D(cos(pOwner->getFacing()), sin(pOwner->getFacing()));
+	auto targetOrientation = wanderOrientation + pOwner->getFacing();
+	auto target = pOwner->getPositionComponent()->getPosition() 
+		+ charOrientation * mWanderOffset;
+	target += Vector2D(cos(targetOrientation),sin(targetOrientation)) * wanderRadius;
+
+	return target;
 }
