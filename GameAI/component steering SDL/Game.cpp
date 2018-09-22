@@ -13,6 +13,7 @@
 #include "Sprite.h"
 #include "SpriteManager.h"
 #include "Timer.h"
+#include "InputSystem.h"
 #include "PlayerMoveToMessage.h"
 #include "ComponentManager.h"
 #include "UnitManager.h"
@@ -25,16 +26,17 @@ const Uint32 MAX_UNITS = 100;
 
 Game::Game()
 	:mpGraphicsSystem(NULL)
-	,mpGraphicsBufferManager(NULL)
-	,mpSpriteManager(NULL)
-	,mpLoopTimer(NULL)
-	,mpMasterTimer(NULL)
-	,mpFont(NULL)
-	,mShouldExit(false)
-	,mBackgroundBufferID("")
-	,mpMessageManager(NULL)
-	,mpComponentManager(NULL)
-	,mpUnitManager(NULL)
+	, mpGraphicsBufferManager(NULL)
+	, mpSpriteManager(NULL)
+	, mpLoopTimer(NULL)
+	, mpMasterTimer(NULL)
+	, mpFont(NULL)
+	, mShouldExit(false)
+	, mBackgroundBufferID("")
+	, mpMessageManager(NULL)
+	, mpComponentManager(NULL)
+	, mpUnitManager(NULL)
+	, mpInputSystem(NULL)
 {
 }
 
@@ -65,8 +67,10 @@ bool Game::init()
 
 
 	mpMessageManager = new GameMessageManager();
+	mpInputSystem = new InputSystem();
 	mpComponentManager = new ComponentManager(MAX_UNITS);
 	mpUnitManager = new UnitManager(MAX_UNITS);
+
 
 	//load buffers
 	mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID,"wallpaper.bmp");
@@ -107,8 +111,8 @@ bool Game::init()
 	//pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::WANDER_CHASE, ZERO_VECTOR2D);
 
-	////commented
-	////create 2 enemies
+	//commented
+	//create 2 enemies
 	pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D((float)gpGame->getGraphicsSystem()->getWidth()-1, 0.0f), 0.0f));
 	//pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::WANDER, ZERO_VECTOR2D, PLAYER_UNIT_ID);
@@ -146,6 +150,8 @@ void Game::cleanup()
 	mpUnitManager = NULL;
 	delete mpComponentManager;
 	mpComponentManager = NULL;
+	delete mpInputSystem;
+	mpInputSystem = NULL;
 }
 
 void Game::beginLoop()
@@ -168,46 +174,11 @@ void Game::processLoop()
 	//draw units
 	mpUnitManager->drawAll();
 
-	SDL_PumpEvents();
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-
-	//create mouse text
-	std::stringstream mousePos;
-	mousePos << x << ":" << y;
-
-	//write text at mouse position
-	mpGraphicsSystem->writeText(*mpFont, (float)x, (float)y, mousePos.str(), BLACK_COLOR);
-
+	mpInputSystem->update();
 	//test of fill region
 	mpGraphicsSystem->fillRegion(*pDest, Vector2D(300, 300), Vector2D(500, 500), RED_COLOR);
 	mpGraphicsSystem->swap();
-
 	mpMessageManager->processMessagesForThisframe();
-
-	//get input - should be moved someplace better
-	SDL_PumpEvents();
-
-	if( SDL_GetMouseState(&x,&y) & SDL_BUTTON(SDL_BUTTON_LEFT) )
-	{
-		Vector2D pos( x, y );
-		GameMessage* pMessage = new PlayerMoveToMessage( pos );
-		MESSAGE_MANAGER->addMessage( pMessage, 0 );
-	}
-
-
-	
-	//all this should be moved to InputManager!!!
-	{
-		//get keyboard state
-		const Uint8 *state = SDL_GetKeyboardState(NULL);
-
-		//if escape key was down then exit the loop
-		if( state[SDL_SCANCODE_ESCAPE] )
-		{
-			mShouldExit = true;
-		}
-	}
 	//Commented
 	//Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
 	/*if (pUnit == NULL)

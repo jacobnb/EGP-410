@@ -15,6 +15,7 @@ class GameMessageManager;
 class Timer;
 class ComponentManager;
 class UnitManager;
+class InputSystem;
 
 const IDType BACKGROUND_SPRITE_ID = 0;
 const IDType PLAYER_ICON_SPRITE_ID = 1;
@@ -53,6 +54,7 @@ private:
 	GameMessageManager* mpMessageManager;
 	ComponentManager* mpComponentManager;
 	UnitManager* mpUnitManager;
+	InputSystem* mpInputSystem;
 	Font* mpFont;
 	Timer* mpLoopTimer;
 	Timer* mpMasterTimer;
