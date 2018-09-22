@@ -1,11 +1,14 @@
 #include <Trackable.h>
 #include "Steering.h"
 
+class FaceSteering;
 class SeekSteering : public Steering
 {
 public:
+	friend class WanderSteering;
 	SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID = INVALID_UNIT_ID, bool shouldFlee = false);
-	static int testMe(const int value);
+	~SeekSteering();
 protected:
 	virtual Steering* getSteering();
+	FaceSteering* mpFaceSteering;
 };

@@ -1,6 +1,8 @@
 #include <Trackable.h>
 #include "Steering.h"
 
+class SeekSteering;
+class FaceSteering;
 class WanderSteering : public Steering
 {
 public:
@@ -13,4 +15,6 @@ private:
 	float mWanderRate = 10.0f;
 	float mWanderRadius;
 	Vector2D getTarget();
+	SeekSteering* mpSeekSteering;
+	FaceSteering* mpFaceSteering;
 };

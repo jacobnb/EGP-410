@@ -1,6 +1,8 @@
 #include <cassert>
 
 #include "WanderSteering.h"
+#include "FaceSteering.h"
+#include "SeekSteering.h"
 #include "Game.h"
 #include "UnitManager.h"
 #include "Unit.h"
@@ -17,9 +19,8 @@ Steering * WanderSteering::getSteering()
 {
 	Vector2D diff;
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
-
-
 	mTargetLoc = getTarget();
+
 	//this is all seekSteering
 	diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
 	diff.normalize();

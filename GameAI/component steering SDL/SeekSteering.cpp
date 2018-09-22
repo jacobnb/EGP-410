@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include "Steering.h"
+#include "FaceSteering.h"
 #include "SeekSteering.h"
 #include "Game.h"
 #include "UnitManager.h"
@@ -10,6 +11,7 @@
 SeekSteering::SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID, bool shouldFlee /*= false*/)
 	: Steering()
 {
+	mpFaceSteering = new FaceSteering(ownerID, targetLoc, targetID);
 	if (shouldFlee)
 	{
 		mType = Steering::FLEE;
@@ -23,10 +25,11 @@ SeekSteering::SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, con
 	setTargetLoc(targetLoc);
 }
 
-int SeekSteering::testMe(const int value)
+SeekSteering::~SeekSteering()
 {
-	return value;
+	delete mpFaceSteering;
 }
+
 
 
 
@@ -59,13 +62,8 @@ Steering* SeekSteering::getSteering()
 	PhysicsData data = pOwner->getPhysicsComponent()->getData();
 	data.acc = diff;
 	
-	//find rotation velocity
-	float velocityDirection = atan2(diff.getY(), diff.getX());
-	float currentDirection = pOwner->getFacing();
-	float rotation = getRotation(velocityDirection, currentDirection);
-	
-	data.rotVel = rotation*2;
-	//std::cout << data.rotVel << std::endl;
+	//Face target. This will probably still face while running away.
+	data.rotVel = mpFaceSteering->getSteering()->getData().rotVel;
 	this->mData = data;
 	return this;
 }
