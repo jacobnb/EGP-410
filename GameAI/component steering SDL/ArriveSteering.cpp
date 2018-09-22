@@ -7,7 +7,7 @@
 
 ArriveSteering::ArriveSteering(const UnitID & ownerID, const Vector2D & targetLoc, const UnitID & targetID, float targetRadius, float slowRadius, float timeToTarget)
 {
-	mType = Steering::ARRIVE;
+	//mType = Steering::ARRIVE;
 	setOwnerID(ownerID);
 	setTargetID(targetID);
 	setTargetLoc(targetLoc);

@@ -18,6 +18,8 @@ public:
 		INVALID_TYPE = -1,
 		SEEK,
 		FLEE,
+		ARRIVE_FACE,
+		WANDER_CHASE,
 		ARRIVE,
 		WANDER,
 		FACE

@@ -8,7 +8,7 @@
 
 WanderSteering::WanderSteering(const UnitID & ownerID, const float & radius)
 {
-	mType = Steering::WANDER; //not sure this is neccessary
+	//mType = Steering::WANDER; //not sure this is neccessary
 	setOwnerID(ownerID);
 	mWanderRadius = radius;
 }

@@ -7,7 +7,7 @@
 
 FaceSteering::FaceSteering(const UnitID & ownerID, const Vector2D & targetLoc, const UnitID & targetID)
 {
-	mType = Steering::FACE;
+	//mType = Steering::FACE;
 	setOwnerID(ownerID);
 	setTargetID(targetID);
 	setTargetLoc(targetLoc);
