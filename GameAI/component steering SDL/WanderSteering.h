@@ -8,6 +8,7 @@ class WanderSteering : public Steering
 public:
 	//need to pass radius and center?
 	WanderSteering(const UnitID& ownerID, const float& radius);
+	~WanderSteering();
 protected:
 	virtual Steering* getSteering();
 private:
@@ -16,5 +17,4 @@ private:
 	float mWanderRadius;
 	Vector2D getTarget();
 	SeekSteering* mpSeekSteering;
-	FaceSteering* mpFaceSteering;
 };
