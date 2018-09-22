@@ -8,11 +8,13 @@
 #include "Unit.h"
 
 
-WanderSteering::WanderSteering(const UnitID & ownerID, const float & radius)
+WanderSteering::WanderSteering(const UnitID & ownerID, const float & radius, float wanderOffset, float wanderRate)
 {
 	//mType = Steering::WANDER; //not sure this is neccessary
 	setOwnerID(ownerID);
 	mWanderRadius = radius;
+	mWanderOffset = wanderOffset;
+	mWanderRate = wanderRate;
 	Vector2D tempLoc = Vector2D(0);
 	mpSeekSteering = new SeekSteering(ownerID, tempLoc);
 }

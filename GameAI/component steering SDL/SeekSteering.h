@@ -6,6 +6,7 @@ class SeekSteering : public Steering
 {
 public:
 	friend class WanderSteering;
+	friend class WanderAndChaseSteering;
 	SeekSteering(const UnitID& ownerID, const Vector2D& targetLoc, const UnitID& targetID = INVALID_UNIT_ID, bool shouldFlee = false);
 	~SeekSteering();
 protected:
