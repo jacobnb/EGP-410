@@ -37,7 +37,19 @@ Steering * WanderSteering::getSteering()
 	this->mData = data;
 	return this;
 }
-
+//Vector2D WanderSteering::getTarget()
+//{
+//	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
+//	float wanderOrientation = atan2(pOwner->getPhysicsComponent()->getVelocity().getY(), pOwner->getPhysicsComponent()->getVelocity().getX());
+//	wanderOrientation += genRandomBinomial()* mWanderRate;
+//	auto charOrientation = pOwner->getPhysicsComponent()->getVelocity();
+//	auto targetOrientation = wanderOrientation + atan2(pOwner->getPhysicsComponent()->getVelocity().getY(), pOwner->getPhysicsComponent()->getVelocity().getX());
+//	auto target = pOwner->getPositionComponent()->getPosition()
+//		+ charOrientation * mWanderOffset;
+//	target += Vector2D(cos(targetOrientation), sin(targetOrientation)) * mWanderRadius;
+//
+//	return target;
+//}
 Vector2D WanderSteering::getTarget()
 {
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);

@@ -29,6 +29,7 @@ Steering * ArriveAndFaceSteering::getSteering()
 	
 	data = mpArriveSteering->getSteering()->getData(); 
 	auto faceData = mpFaceSteering->getSteering()->getData();
+	data.rotAcc = faceData.rotAcc;
 	data.rotVel = faceData.rotVel;
 
 	this->mData = data;

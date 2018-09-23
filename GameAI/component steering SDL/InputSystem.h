@@ -6,7 +6,7 @@
 
 
 
-class InputSystem
+class InputSystem: public Trackable
 {
 public:
 	InputSystem();

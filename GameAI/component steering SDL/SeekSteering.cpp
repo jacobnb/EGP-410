@@ -63,7 +63,10 @@ Steering* SeekSteering::getSteering()
 	data.acc = diff;
 	
 	//Face target. This will probably still face while running away.
+	mpFaceSteering->mTargetLoc = mTargetLoc;
+	data.rotAcc = mpFaceSteering->getSteering()->getData().rotAcc;
 	data.rotVel = mpFaceSteering->getSteering()->getData().rotVel;
+
 	this->mData = data;
 	return this;
 }
