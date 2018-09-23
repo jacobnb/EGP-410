@@ -178,6 +178,7 @@ void Game::processLoop()
 	//test of fill region
 	mpGraphicsSystem->fillRegion(*pDest, Vector2D(300, 300), Vector2D(500, 500), RED_COLOR);
 	mpGraphicsSystem->swap();
+	mpInputSystem->updateAll();
 	mpMessageManager->processMessagesForThisframe();
 	//Commented
 	//Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
@@ -185,6 +186,7 @@ void Game::processLoop()
 	{
 		mpUnitManager->deleteRandomUnit();
 	}*/
+	
 
 }
 
@@ -194,6 +196,7 @@ bool Game::endLoop()
 	mpLoopTimer->sleepUntilElapsed( LOOP_TARGET_TIME );
 	return mShouldExit;
 }
+
 
 float genRandomBinomial()
 {

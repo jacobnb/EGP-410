@@ -17,6 +17,7 @@ public:
 	void updateAll(); //fires keyboard events.
 	void clearQueue();
 	void stuffFromGame();
+	void updateMouseEvents();
 private:
 	int mXMouse, mYMouse;
 	//GameMessage

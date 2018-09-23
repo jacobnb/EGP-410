@@ -41,7 +41,7 @@ public:
 	inline GraphicsSystem* getGraphicsSystem() const { return mpGraphicsSystem; };
 	inline GraphicsBufferManager* getGraphicsBufferManager() const { return mpGraphicsBufferManager; };
 	inline SpriteManager* getSpriteManager() const { return mpSpriteManager; };
-	inline GameMessageManager* getMessageManager() { return mpMessageManager; };
+	inline GameMessageManager* getMessageManager() {return mpMessageManager;}; 
 	inline ComponentManager* getComponentManager() { return mpComponentManager; };
 	inline UnitManager* getUnitManager() { return mpUnitManager; };
 	inline Timer* getMasterTimer() const { return mpMasterTimer; };

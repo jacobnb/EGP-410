@@ -10,6 +10,7 @@
 #include "Defines.h"
 #include "Game.h"
 #include "PlayerMoveToMessage.h"
+#include "GameMessageManager.h"
 InputSystem::InputSystem()
 {
 }
@@ -57,7 +58,7 @@ int  InputSystem::getMouseState()
 			return 0;
 		}
 	}
-	return 0;
+	return -1;
 }
 
 void InputSystem::update() //handles mouse events for menu.
@@ -93,9 +94,12 @@ void InputSystem::update(int numEvents) //Handles keyboard events for game loop
 	}
 }
 
+
+
 void InputSystem::updateAll()
 {
 	SDL_Event nextEvent;
+	updateMouseEvents();
 	while (true)
 	{
 		if (!SDL_PollEvent(&nextEvent)) {
@@ -116,6 +120,7 @@ void InputSystem::updateAll()
 
 		}
 	}
+	
 }
 
 void InputSystem::clearQueue()
@@ -126,7 +131,6 @@ void InputSystem::clearQueue()
 
 void InputSystem::stuffFromGame()
 {
-
 	SDL_PumpEvents();
 	int x, y;
 	SDL_GetMouseState(&x, &y);
@@ -137,15 +141,15 @@ void InputSystem::stuffFromGame()
 	mousePos << x << ":" << y;
 	//write text at mouse position
 	//mpGraphicsSystem->writeText(*mpFont, (float)x, (float)y, mousePos.str(), BLACK_COLOR);
+}
 
-
-	if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT))
-	{
-		
-		Vector2D pos(x, y);
+void InputSystem::updateMouseEvents()
+{
+	if (SDL_GetMouseState(&mXMouse, &mYMouse) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
+		Vector2D pos(mXMouse, mYMouse);
 		GameMessage* pMessage = new PlayerMoveToMessage(pos);
-		//MESSAGE_MANAGER->addMessage(pMessage, 0);
+		MESSAGE_MANAGER->addMessage(pMessage, 0);
 	}
-
+	
 }
 
