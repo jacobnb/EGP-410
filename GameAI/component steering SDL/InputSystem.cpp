@@ -10,6 +10,7 @@
 #include "Defines.h"
 #include "Game.h"
 #include "PlayerMoveToMessage.h"
+#include "KeydownMessage.h"
 #include "GameMessageManager.h"
 InputSystem::InputSystem()
 {
@@ -79,6 +80,7 @@ void InputSystem::update(int numEvents) //Handles keyboard events for game loop
 		switch (nextEvent.type)
 		{
 		case SDL_KEYDOWN: //esc calls pause
+
 			//cout << "keydown: " << SDL_GetKeyName(nextEvent.key.keysym.sym) << endl;
 			//mpEventSystem->fireEvent(KeyEvent(SDL_GetKeyName(nextEvent.key.keysym.sym)));
 			break;
@@ -105,10 +107,12 @@ void InputSystem::updateAll()
 		if (!SDL_PollEvent(&nextEvent)) {
 			return;
 		}
+		GameMessage * pMessage = NULL;
 		switch (nextEvent.type)
 		{
 		case SDL_KEYDOWN: 
-			//mpEventSystem->fireEvent(KeyEvent(SDL_GetKeyName(nextEvent.key.keysym.sym)));
+			pMessage = new KeydownMessage(KeyType(nextEvent.key.keysym.scancode));
+			MESSAGE_MANAGER->addMessage(pMessage, 0);
 			break;
 		case SDL_KEYUP:
 			break;
@@ -120,7 +124,6 @@ void InputSystem::updateAll()
 
 		}
 	}
-	
 }
 
 void InputSystem::clearQueue()

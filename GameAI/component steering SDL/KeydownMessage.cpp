@@ -1,6 +1,7 @@
 #include "KeydownMessage.h"
-
-KeydownMessage::KeydownMessage(const char& key)
+#include "Game.h"
+#include "UnitManager.h"
+KeydownMessage::KeydownMessage(const KeyType& key)
 	:GameMessage(KEYDOWN_MESSAGE)
 	, mKey(key)
 {
@@ -12,7 +13,21 @@ KeydownMessage::~KeydownMessage()
 
 void KeydownMessage::process()
 {
-	if (mKey == 'D') {
-		std::cout << "delete random unit\n";
+	switch (mKey) {
+		case KEY_D: {
+			gpGame->deleteRandomEnemyUnit();
+			break;
+		}
+		case KEY_ESCAPE: {
+			gpGame->quitLoop();
+			break;
+		}
+		case KEY_ENTER:
+		{
+			gpGame->spawnEnemyAtRandomLoc();
+			break;
+		}
+
 	}
+	
 }

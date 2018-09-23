@@ -76,4 +76,5 @@ void Unit::setSteering(Steering::SteeringType type, Vector2D targetLoc /*= ZERO_
 	{
 		pSteeringComponent->setData(SteeringData(type, targetLoc, mID, targetUnitID));
 	}
+
 }

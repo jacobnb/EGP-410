@@ -31,7 +31,7 @@ public:
 	const PositionData& getData() const { return mData; };
 	void setData(const PositionData& data) { mData = data; wrapCoords(); };
 	void modData(const PositionData& data) { mData.pos += data.pos; mData.facing += data.facing; wrapCoords(); };
-
+	void setScreenWrap(bool shouldWrap);
 private:
 	PositionData mData;
 	bool mWrap;//should we wrap around the screen?

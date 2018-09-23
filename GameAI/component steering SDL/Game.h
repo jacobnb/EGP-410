@@ -37,6 +37,7 @@ public:
 	void beginLoop();
 	void processLoop();
 	bool endLoop();
+	inline void quitLoop() { mShouldExit = true; };
 
 	inline GraphicsSystem* getGraphicsSystem() const { return mpGraphicsSystem; };
 	inline GraphicsBufferManager* getGraphicsBufferManager() const { return mpGraphicsBufferManager; };
@@ -46,7 +47,10 @@ public:
 	inline UnitManager* getUnitManager() { return mpUnitManager; };
 	inline Timer* getMasterTimer() const { return mpMasterTimer; };
 	inline double getCurrentTime() const { return mpMasterTimer->getElapsedTime(); };
-
+	
+	//my functions
+	void spawnEnemyAtRandomLoc();
+	void deleteRandomEnemyUnit();
 private:
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;

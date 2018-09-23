@@ -31,6 +31,7 @@ Steering * FaceSteering::getSteering()
 	float currentDirection = pOwner->getFacing();
 	float rotation = getRotation(targetDirection, currentDirection);
 	data.rotVel = rotation * 2;
+	data.acc = data.vel * -1; //holds unit in place, gets overwritten by steering using face.
 	this->mData = data;
 	return this;
 }

@@ -2,6 +2,11 @@
 #include "Game.h"
 #include "GraphicsSystem.h"
 
+void PositionComponent::setScreenWrap(bool shouldWrap)
+{
+	mWrap = shouldWrap;
+}
+
 void PositionComponent::wrapCoords()
 {
 	if (mWrap)
