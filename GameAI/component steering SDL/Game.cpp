@@ -189,7 +189,7 @@ void Game::processLoop()
 
 bool Game::endLoop()
 {
-	//mpMasterTimer->start();
+	mpMasterTimer->start();
 	mpLoopTimer->sleepUntilElapsed( LOOP_TARGET_TIME );
 	return mShouldExit;
 }
@@ -197,9 +197,15 @@ bool Game::endLoop()
 void Game::spawnEnemyAtRandomLoc()
 {
 	Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
-	pUnit->setSteering(Steering::WANDER_CHASE, ZERO_VECTOR2D, PLAYER_UNIT_ID);
-	pUnit->setShowTarget(true);
-	pUnit->getPositionComponent()->setScreenWrap(true);
+	if (pUnit == NULL) { //prevents overflow error.
+		deleteRandomEnemyUnit();
+	}
+	else {
+		pUnit->setSteering(Steering::WANDER_CHASE, ZERO_VECTOR2D, PLAYER_UNIT_ID);
+		pUnit->setShowTarget(true);
+		pUnit->getPositionComponent()->setScreenWrap(true);
+	}
+	
 }
 
 void Game::deleteRandomEnemyUnit()
