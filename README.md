@@ -9,10 +9,10 @@ or click on the "Local Windows Debugger" button at the top of the screen
 but you may have to retarget projects for your windows SDK version
 
 # Keyboard Inputs
-Left Click = player travels to click location
-Enter = Spawn an enemy unit that wanders and chases the player
-D = Delete a random enemy unit
-Esc = Quit the game
+* Left Click = player travels to click location
+* Enter = Spawn an enemy unit that wanders and chases the player
+* D = Delete a random enemy unit
+* Esc = Quit the game
 
 
 # Student Version
