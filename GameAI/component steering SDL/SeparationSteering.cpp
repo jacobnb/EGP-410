@@ -24,14 +24,14 @@ Steering * SeparationSteering::getSteering()
 
 	//Find location
 	Vector2D targetLoc = getVectorAwayFromUnits(
-		getUnitsInRadius(
+		getUnitLocsInRadius(
 			pOwner->getPositionComponent()->getPosition(),
 			mDetectRadius,
 			gpGame->getUnitManager()->getAllUnits() //cache this in steering.h to speed up performcance
 		),
 		pOwner
 	);
-
+	targetLoc += pOwner->getPositionComponent()->getPosition();
 	setTargetLoc(targetLoc);
 
 	//Seek location
@@ -44,7 +44,7 @@ Steering * SeparationSteering::getSteering()
 
 Vector2D SeparationSteering::getVectorAwayFromUnits(std::vector<Vector2D>* unitLocations, const Unit* owner)
 {
-	Vector2D away = Vector2D(-200, -200);
+	Vector2D away = ZERO_VECTOR2D;
 	auto selfLoc = owner->getPositionComponent()->getPosition();
 	auto maxAcc = owner->getMaxAcc();
 	for (std::vector<Vector2D>::iterator it = unitLocations->begin();

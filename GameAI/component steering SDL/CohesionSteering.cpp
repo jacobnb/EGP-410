@@ -23,19 +23,18 @@ Steering * CohesionSteering::getSteering()
 
 	//Find location
 	Vector2D targetLoc = getCenterOfUnits(
-		getUnitsInRadius(
+		getUnitLocsInRadius(
 			pOwner->getPositionComponent()->getPosition(),
 			mDetectRadius,
 			gpGame->getUnitManager()->getAllUnits() //cache this in steering.h to speed up performcance
 		)
 	);
-
+	targetLoc += pOwner->getPositionComponent()->getPosition();
 	setTargetLoc(targetLoc);
 
 	//Seek location
 	mpSeekSteering->setTargetLoc(targetLoc);
 	data = mpSeekSteering->getSteering()->getData();
-	
 	this->mData = data;
 	return this;
 }

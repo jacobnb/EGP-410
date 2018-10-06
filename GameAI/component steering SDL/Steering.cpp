@@ -24,9 +24,9 @@ float Steering::getRotation(float targetDirection, float currentDirection)
 	return rotation;
 }
 
-std::vector<Vector2D>* Steering::getUnitsInRadius(Vector2D ownerPosit, float radius, std::vector<Unit*> allUnits)
+std::vector<Vector2D>* Steering::getUnitLocsInRadius(Vector2D ownerPosit, float radius, std::vector<Unit*> allUnits)
 {
-	//this gets all units (including self) in mDetectRadius
+	//this gets all unit locations (including self) in mDetectRadius
 	using std::vector;
 	vector<Vector2D>* unitPosits = new vector<Vector2D>();
 

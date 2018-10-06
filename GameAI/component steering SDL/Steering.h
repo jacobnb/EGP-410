@@ -51,5 +51,5 @@ protected:
 	virtual Steering* getSteering() { return this; };//overridden by sub-classes
 	//helpers
 	float getRotation(float velocityDirection, float currentDirection);
-	std::vector<Vector2D>* getUnitsInRadius(Vector2D ownerPosit, float radius, std::vector<Unit*> allUnits);
+	std::vector<Vector2D>* getUnitLocsInRadius(Vector2D ownerPosit, float radius, std::vector<Unit*> allUnits);
 };

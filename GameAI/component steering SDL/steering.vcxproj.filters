@@ -94,6 +94,9 @@
     <ClCompile Include="SeparationSteering.cpp">
       <Filter>Source Files\Steering</Filter>
     </ClCompile>
+    <ClCompile Include="AlignSteering.cpp">
+      <Filter>Source Files\Steering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsBuffer.h">
@@ -187,6 +190,9 @@
       <Filter>Header Files\Steering</Filter>
     </ClInclude>
     <ClInclude Include="SeparationSteering.h">
+      <Filter>Header Files\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="AlignSteering.h">
       <Filter>Header Files\Steering</Filter>
     </ClInclude>
   </ItemGroup>
