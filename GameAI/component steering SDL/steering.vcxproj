@@ -33,6 +33,7 @@
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SeekSteering.h" />
+    <ClInclude Include="SeparationSteering.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="Steering.h" />
@@ -65,6 +66,7 @@
     <ClCompile Include="PositionComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SeekSteering.cpp" />
+    <ClCompile Include="SeparationSteering.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Steering.cpp" />

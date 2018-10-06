@@ -17,7 +17,5 @@ protected:
 private:
 	float mDetectRadius;
 	SeekSteering* mpSeekSteering;
-	std::vector<Vector2D>* getUnitsInRadius(Vector2D ownerPosit, std::vector<Unit*> allUnits);
-	//pass in position and gpGame->getUnitManager()->getAllUnits(); so it's more easily testable.
 	Vector2D getCenterOfUnits(std::vector<Vector2D>* unitLocations);
 };

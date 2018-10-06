@@ -25,7 +25,8 @@ Steering * CohesionSteering::getSteering()
 	Vector2D targetLoc = getCenterOfUnits(
 		getUnitsInRadius(
 			pOwner->getPositionComponent()->getPosition(),
-			gpGame->getUnitManager()->getAllUnits()
+			mDetectRadius,
+			gpGame->getUnitManager()->getAllUnits() //cache this in steering.h to speed up performcance
 		)
 	);
 
@@ -39,22 +40,7 @@ Steering * CohesionSteering::getSteering()
 	return this;
 }
 
-std::vector<Vector2D>* CohesionSteering::getUnitsInRadius(Vector2D ownerPosit, std::vector<Unit*> allUnits)
-{
-	//this gets all units (including self) in mDetectRadius
-	using std::vector;
-	vector<Vector2D>* unitPosits = new vector<Vector2D>();
-
-	for (vector<Unit*>::iterator it = allUnits.begin();
-		it != allUnits.end(); it++){
-		Vector2D loc = (*it)->getPositionComponent()->getPosition();
-		if ((ownerPosit-loc).getLength() < mDetectRadius) {
-			unitPosits->push_back(loc);
-		}
-	}
-	return unitPosits;
-}
-
+	
 Vector2D CohesionSteering::getCenterOfUnits(std::vector<Vector2D>* unitLocations)
 {
 	Vector2D centerLoc = ZERO_VECTOR2D;

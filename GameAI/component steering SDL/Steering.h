@@ -7,9 +7,9 @@
 #include <Trackable.h>
 #include "defines.h"
 #include "PhysicsComponent.h"
+#include <vector>
 
-
-
+class Unit;
 class Steering: public Trackable
 {
 public:
@@ -39,7 +39,7 @@ public:
 	//void setData(const PhysicsData& data) { mData = data; };
 	const PhysicsData& getData() const { return mData; };
 	void update();
-
+	
 	
 protected:
 	SteeringType mType;
@@ -51,4 +51,5 @@ protected:
 	virtual Steering* getSteering() { return this; };//overridden by sub-classes
 	//helpers
 	float getRotation(float velocityDirection, float currentDirection);
+	std::vector<Vector2D>* getUnitsInRadius(Vector2D ownerPosit, float radius, std::vector<Unit*> allUnits);
 };

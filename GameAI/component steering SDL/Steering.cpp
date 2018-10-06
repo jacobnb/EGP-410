@@ -1,5 +1,5 @@
 #include "Steering.h"
-
+#include "Unit.h"
 
 void Steering::update()
 {
@@ -22,4 +22,20 @@ float Steering::getRotation(float targetDirection, float currentDirection)
 		rotation += 2 * pi;
 	}
 	return rotation;
+}
+
+std::vector<Vector2D>* Steering::getUnitsInRadius(Vector2D ownerPosit, float radius, std::vector<Unit*> allUnits)
+{
+	//this gets all units (including self) in mDetectRadius
+	using std::vector;
+	vector<Vector2D>* unitPosits = new vector<Vector2D>();
+
+	for (vector<Unit*>::iterator it = allUnits.begin();
+		it != allUnits.end(); it++) {
+		Vector2D loc = (*it)->getPositionComponent()->getPosition();
+		if ((ownerPosit - loc).getLength() < radius) {
+			unitPosits->push_back(loc);
+		}
+	}
+	return unitPosits;
 }
