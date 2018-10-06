@@ -7,7 +7,7 @@
 #include "ArriveSteering.h"
 #include "ArriveAndFaceSteering.h"
 #include "WanderAndChaseSteering.h"
-#include "CohesionSteering.h"//replace w/ flock
+#include "SeparationSteering.h"//replace w/ flock
 
 SteeringComponent::SteeringComponent(const ComponentID& id, const ComponentID& physicsComponentID) 
 	:Component(id)
@@ -92,7 +92,7 @@ void SteeringComponent::setData(const SteeringData& data)
 			//cleanup old steering - todo: check for already existing steering and reuse if possible
 			delete mpSteering;
 			//create new steering
-			mpSteering = new CohesionSteering(data.ownerID);
+			mpSteering = new SeparationSteering(data.ownerID);
 
 			break;
 		}
