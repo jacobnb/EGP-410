@@ -29,7 +29,7 @@ Steering * SeparationSteering::getSteering()
 			mDetectRadius,
 			gpGame->getUnitManager()->getAllUnits() //cache this in steering.h to speed up performcance
 		),
-		pOwner->getPositionComponent()->getPosition()
+		pOwner
 	);
 
 	setTargetLoc(targetLoc);
@@ -42,15 +42,20 @@ Steering * SeparationSteering::getSteering()
 	return this;
 }
 
-Vector2D SeparationSteering::getVectorAwayFromUnits(std::vector<Vector2D>* unitLocations, const Vector2D& selfLoc)
+Vector2D SeparationSteering::getVectorAwayFromUnits(std::vector<Vector2D>* unitLocations, const Unit* owner)
 {
 	Vector2D away = Vector2D(-200, -200);
+	auto selfLoc = owner->getPositionComponent()->getPosition();
+	auto maxAcc = owner->getMaxAcc();
 	for (std::vector<Vector2D>::iterator it = unitLocations->begin();
 		it != unitLocations->end(); it++) {
-		away += (*it - selfLoc);
-	}
-	if (unitLocations->size() > 0) {
-		away *= (1.0 / unitLocations->size());
+		Vector2D diff = *it - selfLoc;
+		float length = diff.getLength();
+		if (length != 0) { //ignores self
+			diff.normalize();
+			away += diff*(maxAcc* mDetectRadius / length);
+		}
+		//could do something more complex, but this should work to weight it by distance
 	}
 	return away*-1;
 }

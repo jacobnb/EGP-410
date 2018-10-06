@@ -17,5 +17,5 @@ protected:
 private:
 	float mDetectRadius;
 	SeekSteering* mpSeekSteering;
-	Vector2D getVectorAwayFromUnits(std::vector<Vector2D>* unitLocations, const Vector2D& selfLoc);
+	Vector2D getVectorAwayFromUnits(std::vector<Vector2D>* unitLocations, const Unit* owner);
 };
