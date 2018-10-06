@@ -213,6 +213,21 @@ void Game::deleteRandomEnemyUnit()
 	mpUnitManager->deleteRandomUnit();
 }
 
+void Game::spawnTenBoids()
+{
+	for (int c = 0; c < 10; c++) {
+		Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
+		if (pUnit == NULL) { //prevents overflow error.
+			deleteRandomEnemyUnit();
+		}
+		else {
+			pUnit->setSteering(Steering::FLOCK, ZERO_VECTOR2D, PLAYER_UNIT_ID);
+			//pUnit->setShowTarget(true);
+			pUnit->getPositionComponent()->setScreenWrap(false);
+		}
+	}
+}
+
 
 float genRandomBinomial()
 {

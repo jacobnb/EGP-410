@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="ArriveAndFaceSteering.h" />
     <ClInclude Include="ArriveSteering.h" />
+    <ClInclude Include="CohesionSteering.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentManager.h" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <ClCompile Include="ArriveAndFaceSteering.cpp" />
     <ClCompile Include="ArriveSteering.cpp" />
+    <ClCompile Include="CohesionSteering.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentManager.cpp" />

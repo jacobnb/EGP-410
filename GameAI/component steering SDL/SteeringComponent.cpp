@@ -1,13 +1,14 @@
 #include "ComponentManager.h"
 #include "SteeringComponent.h"
 
-//maybe replace following by class declarations?
 #include "SeekSteering.h"
 #include "WanderSteering.h"
 #include "FaceSteering.h"
 #include "ArriveSteering.h"
 #include "ArriveAndFaceSteering.h"
 #include "WanderAndChaseSteering.h"
+#include "CohesionSteering.h"//replace w/ flock
+
 SteeringComponent::SteeringComponent(const ComponentID& id, const ComponentID& physicsComponentID) 
 	:Component(id)
 	, mPhysicsComponentID(physicsComponentID)
@@ -84,6 +85,15 @@ void SteeringComponent::setData(const SteeringData& data)
 			delete mpSteering;
 			//create new steering
 			mpSteering = new FaceSteering(data.ownerID, data.targetLoc, data.targetID);
+			break;
+		}
+		case Steering::FLOCK:
+		{
+			//cleanup old steering - todo: check for already existing steering and reuse if possible
+			delete mpSteering;
+			//create new steering
+			mpSteering = new CohesionSteering(data.ownerID);
+
 			break;
 		}
 		default:

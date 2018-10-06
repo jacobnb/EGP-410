@@ -98,6 +98,7 @@ void InputSystem::update(int numEvents) //Handles keyboard events for game loop
 
 
 
+//this is the one in use.
 void InputSystem::updateAll()
 {
 	SDL_Event nextEvent;
@@ -117,7 +118,8 @@ void InputSystem::updateAll()
 		case SDL_KEYUP:
 			break;
 		case SDL_QUIT: //clicks on red X
-			//mpEventSystem->fireEvent(KeyEvent("Close window"));
+			pMessage = new KeydownMessage(KeyType(SDL_SCANCODE_ESCAPE));
+			MESSAGE_MANAGER->addMessage(pMessage, 0);
 			break;
 		default:
 			break;

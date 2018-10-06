@@ -36,8 +36,6 @@ Steering * WanderAndChaseSteering::getSteering()
 	mTargetLoc = pTarget->getPositionComponent()->getPosition();
 	auto diff = mTargetLoc - pOwner->getPositionComponent()->getPosition();
 
-
-
 	//chase or wander
 	if (diff.getLength() > mChaseDistance) {
 		data = mpWanderSteering->getSteering()->getData();

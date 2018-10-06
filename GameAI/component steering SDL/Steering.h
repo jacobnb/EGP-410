@@ -22,7 +22,8 @@ public:
 		WANDER_CHASE,
 		ARRIVE,
 		WANDER,
-		FACE
+		FACE,
+		FLOCK
 	};
 
 	//constructors and destructors

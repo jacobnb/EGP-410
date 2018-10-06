@@ -51,6 +51,7 @@ public:
 	//my functions
 	void spawnEnemyAtRandomLoc();
 	void deleteRandomEnemyUnit();
+	void spawnTenBoids();
 private:
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;

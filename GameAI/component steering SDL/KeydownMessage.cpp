@@ -15,6 +15,7 @@ void KeydownMessage::process()
 {
 	switch (mKey) {
 		case KEY_D: {
+			//should also delete a random boid
 			gpGame->deleteRandomEnemyUnit();
 			break;
 		}
@@ -25,6 +26,10 @@ void KeydownMessage::process()
 		case KEY_ENTER:
 		{
 			gpGame->spawnEnemyAtRandomLoc();
+			break;
+		}
+		case KEY_A: {
+			gpGame->spawnTenBoids();
 			break;
 		}
 
