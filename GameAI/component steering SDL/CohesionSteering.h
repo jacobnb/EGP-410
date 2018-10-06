@@ -9,9 +9,12 @@ class SeekSteering;
 class CohesionSteering : public Steering
 {
 public:
+	friend class FlockingSteering;
 	CohesionSteering(const UnitID& ownerID, float detectionRadius = 200);
 	~CohesionSteering();
+	inline float getRadius() { return mDetectRadius; };
 	inline void setRadius(const float detectionRadius) { mDetectRadius = detectionRadius; };
+	inline void incrementRadius(const float toAdd) { mDetectRadius += toAdd; };
 protected:
 	virtual Steering* getSteering();
 private:

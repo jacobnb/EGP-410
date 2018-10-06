@@ -223,7 +223,7 @@ void Game::spawnTenBoids()
 		else {
 			pUnit->setSteering(Steering::FLOCK, ZERO_VECTOR2D, PLAYER_UNIT_ID);
 			//pUnit->setShowTarget(true);
-			pUnit->getPositionComponent()->setScreenWrap(false);
+			pUnit->getPositionComponent()->setScreenWrap(true);
 		}
 	}
 }
