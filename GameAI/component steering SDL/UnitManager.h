@@ -7,6 +7,7 @@
 #include "PositionComponent.h"
 #include "PhysicsComponent.h"
 #include "Unit.h"
+#include <vector>
 
 class Unit;
 class Sprite;
@@ -34,6 +35,8 @@ public:
 	void updateAll(float elapsedTime);
 
 	Unit* getPlayerUnit() const { return getUnit(PLAYER_UNIT_ID); };
+
+	std::vector<Unit*> getAllUnits();
 
 private:
 	static UnitID msNextUnitID;

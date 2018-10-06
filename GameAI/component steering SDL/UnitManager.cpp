@@ -153,3 +153,16 @@ void UnitManager::updateAll(float elapsedTime)
 		it->second->update(elapsedTime);
 	}
 }
+
+std::vector<Unit*> UnitManager::getAllUnits()
+{
+	//https://stackoverflow.com/questions/110157/how-to-retrieve-all-keys-or-values-from-a-stdmap-and-put-them-into-a-vector
+
+	vector<Unit*> units;
+	units.reserve(mUnitMap.size());
+	for (map<UnitID, Unit*>::iterator it = mUnitMap.begin(); it != mUnitMap.end(); ++it) {
+		units.push_back(it->second);
+	}
+	units.shrink_to_fit();
+	return units;
+}
