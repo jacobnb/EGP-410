@@ -29,7 +29,8 @@ Steering * CohesionSteering::getSteering()
 			gpGame->getUnitManager()->getAllUnits() //cache this in steering.h to speed up performcance
 		)
 	);
-	targetLoc += pOwner->getPositionComponent()->getPosition();
+	//We don't need to add player position b/c it's not taken out of the average
+
 	setTargetLoc(targetLoc);
 
 	//Seek location
