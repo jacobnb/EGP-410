@@ -67,9 +67,8 @@ private:
 	Timer* mpMasterTimer;
 	DataLoader* mpDataLoader;
 	bool mShouldExit;
-
-
 	std::string truncateFloat(float num);
+	
 	//should be somewhere else
 	GraphicsBufferID mBackgroundBufferID = "woods";
 	GraphicsBufferID mPlayerIconBufferID = "player";

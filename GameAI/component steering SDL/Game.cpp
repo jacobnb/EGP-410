@@ -114,17 +114,6 @@ bool Game::init()
 	//pUnit->setShowTarget(true);
 	pUnit->setSteering(Steering::WANDER, ZERO_VECTOR2D);
 
-	//commented
-	//create 2 enemies
-	//pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D((float)gpGame->getGraphicsSystem()->getWidth()-1, 0.0f), 0.0f));
-	//pUnit->setShowTarget(true);
-	//pUnit->setSteering(Steering::WANDER_CHASE, ZERO_VECTOR2D, PLAYER_UNIT_ID);
-
-	//pUnit = mpUnitManager->createUnit(*pEnemyArrow, true, PositionData(Vector2D(0.0f, (float)gpGame->getGraphicsSystem()->getHeight()-1), 0.0f));
-	//pUnit->setShowTarget(false);
-	//pUnit->setSteering(Steering::FLEE, ZERO_VECTOR2D, PLAYER_UNIT_ID);
-
-
 	return true;
 }
 
@@ -189,10 +178,6 @@ void Game::processLoop()
 	mpGraphicsSystem->swap();
 	mpInputSystem->updateAll();
 	mpMessageManager->processMessagesForThisframe();
-	//Commented
-	//Unit* pUnit = mpUnitManager->createRandomUnit(*mpSpriteManager->getSprite(AI_ICON_SPRITE_ID));
-
-	
 
 }
 
@@ -240,7 +225,7 @@ void Game::spawnTenBoids()
 void Game::adjustFlockUI()
 {
 	float xPosit = 20;
-	float yPosit = 600;
+	float yPosit = 500;
 	float yIncrement = -30;
 
 	std::string toWrite = "R -- Cohesion = ";
