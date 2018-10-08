@@ -7,6 +7,7 @@
 #include "UnitManager.h"
 #include "Unit.h"
 #include "DataLoader.h"
+#include "FaceSteering.h"
 FlockingSteering::FlockingSteering(const UnitID & ownerID)
 {
 	setOwnerID(ownerID);
@@ -18,6 +19,7 @@ FlockingSteering::FlockingSteering(const UnitID & ownerID)
 	mpSeparationSteer = new SeparationSteering(ownerID
 	, dl->getSeparationRadius());
 	mpWanderSteer = new WanderSteering(ownerID);
+	mpFaceSteer = new FaceSteering(ownerID, ZERO_VECTOR2D);
 	mCohesionMult = dl->getCohesionFactor();
 	mSeparationMult = dl->getSeparationFactor();
 	mAlignMult = dl->getAlignmentFactor();
@@ -66,6 +68,8 @@ Steering * FlockingSteering::getSteering()
 {
 	Unit* pOwner = gpGame->getUnitManager()->getUnit(mOwnerID);
 	auto data = pOwner->getPhysicsComponent()->getData();
+
+	//this are all acceleration not velocity.
 	auto cohesionVel = mpCohesionSteer->getSteering()->getData().acc;
 	auto separationVel = mpSeparationSteer->getSteering()->getData().acc;
 	auto alignVel = mpAlignSteer->getSteering()->getData().acc;
@@ -74,8 +78,24 @@ Steering * FlockingSteering::getSteering()
 		+ separationVel * mSeparationMult
 		+ alignVel * mAlignMult
 		+ wanderVel * mWanderMult;
+	
+	if (data.acc.getLength() > data.maxAccMagnitude) {
+		data.acc.normalize();
+		data.acc *= data.maxAccMagnitude;
+	}
 
-	//I think all the steerings include face (through seek) but if not, add face here.
+	//these are rotational accelaration
+	auto alignRot = mpAlignSteer->getSteering()->getData().rotAcc;
+	auto wanderRot = mpWanderSteer->getSteering()->getData().rotAcc;
+	data.rotAcc = alignRot
+		+ wanderRot; //this isn't perfect, but it works well enough
+	
+	auto rotAcc = abs(data.rotAcc);
+	if (rotAcc > data.maxRotAcc) {
+		data.rotAcc = data.rotAcc / rotAcc;
+		data.rotAcc *= data.maxRotAcc;
+	}
+
 	this->mData = data;
 	return this;
 }

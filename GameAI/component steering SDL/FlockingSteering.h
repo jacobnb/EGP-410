@@ -6,6 +6,7 @@ class AlignSteering;
 class CohesionSteering;
 class SeparationSteering;
 class WanderSteering;
+class FaceSteering;
 
 class FlockingSteering : public Steering
 {
@@ -38,6 +39,7 @@ private:
 	CohesionSteering* mpCohesionSteer;
 	SeparationSteering* mpSeparationSteer;
 	WanderSteering* mpWanderSteer;
+	FaceSteering* mpFaceSteer;
 
 	float mCohesionMult = 0.2;
 	float mSeparationMult = 0.2;
