@@ -1,6 +1,7 @@
 #include "KeydownMessage.h"
 #include "Game.h"
 #include "UnitManager.h"
+#include "DataLoader.h"
 KeydownMessage::KeydownMessage(const KeyType& key)
 	:GameMessage(KEYDOWN_MESSAGE)
 	, mKey(key)
@@ -20,6 +21,7 @@ void KeydownMessage::process()
 			break;
 		}
 		case KEY_ESCAPE: {
+			gpGame->getDataLoader()->writeData();
 			gpGame->quitLoop();
 			break;
 		}

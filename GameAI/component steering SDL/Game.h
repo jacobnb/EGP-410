@@ -16,6 +16,7 @@ class Timer;
 class ComponentManager;
 class UnitManager;
 class InputSystem;
+class DataLoader;
 
 const IDType BACKGROUND_SPRITE_ID = 0;
 const IDType PLAYER_ICON_SPRITE_ID = 1;
@@ -45,9 +46,9 @@ public:
 	inline GameMessageManager* getMessageManager() {return mpMessageManager;}; 
 	inline ComponentManager* getComponentManager() { return mpComponentManager; };
 	inline UnitManager* getUnitManager() { return mpUnitManager; };
+	inline DataLoader* getDataLoader() const { return mpDataLoader; };
 	inline Timer* getMasterTimer() const { return mpMasterTimer; };
 	inline double getCurrentTime() const { return mpMasterTimer->getElapsedTime(); };
-	
 	//my functions
 	void spawnEnemyAtRandomLoc();
 	void deleteRandomEnemyUnit();
@@ -63,6 +64,7 @@ private:
 	Font* mpFont;
 	Timer* mpLoopTimer;
 	Timer* mpMasterTimer;
+	DataLoader* mpDataLoader;
 	bool mShouldExit;
 
 	//should be somewhere else

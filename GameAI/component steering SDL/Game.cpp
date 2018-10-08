@@ -17,7 +17,7 @@
 #include "PlayerMoveToMessage.h"
 #include "ComponentManager.h"
 #include "UnitManager.h"
-
+#include "DataLoader.h"
 Game* gpGame = NULL;
 
 const int WIDTH = 1024;
@@ -37,6 +37,7 @@ Game::Game()
 	, mpComponentManager(NULL)
 	, mpUnitManager(NULL)
 	, mpInputSystem(NULL)
+	, mpDataLoader(NULL)
 {
 }
 
@@ -70,7 +71,7 @@ bool Game::init()
 	mpInputSystem = new InputSystem();
 	mpComponentManager = new ComponentManager(MAX_UNITS);
 	mpUnitManager = new UnitManager(MAX_UNITS);
-
+	mpDataLoader = new DataLoader();
 
 	//load buffers
 	mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID,"wallpaper.bmp");
@@ -127,6 +128,7 @@ bool Game::init()
 
 void Game::cleanup()
 {
+
 	//delete the timers
 	delete mpLoopTimer;
 	mpLoopTimer = NULL;
@@ -140,6 +142,8 @@ void Game::cleanup()
 	delete mpGraphicsSystem;
 	mpGraphicsSystem = NULL;
 
+	delete mpDataLoader;
+	mpDataLoader = NULL;
 	delete mpGraphicsBufferManager;
 	mpGraphicsBufferManager = NULL;
 	delete mpSpriteManager;
