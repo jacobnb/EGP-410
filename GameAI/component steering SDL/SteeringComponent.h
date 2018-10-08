@@ -8,6 +8,7 @@
 class PhysicsComponent;
 class Steering;
 enum Steering::SteeringType;
+class FlockingSteering;
 
 struct SteeringData : public Trackable
 {
@@ -36,6 +37,7 @@ public:
 	void setTargetLoc(const Vector2D& pos) { mData.targetLoc = pos; };
 	void setTargetUnitID(const UnitID& id) { mData.targetID = id; };
 	void applySteering(PhysicsComponent& physicsComponent);
+	FlockingSteering* getFlockingSteering();
 private:
 	ComponentID mPhysicsComponentID;
 	SteeringData mData;

@@ -34,6 +34,14 @@ void SteeringComponent::applySteering(PhysicsComponent& physicsComponent)
 	}
 }
 
+FlockingSteering * SteeringComponent::getFlockingSteering()
+{
+	if (getType() == Steering::FLOCK) {
+		return (FlockingSteering*)mpSteering;
+	}
+	return nullptr;
+}
+
 void SteeringComponent::setData(const SteeringData& data)
 {
 	mData = data;
