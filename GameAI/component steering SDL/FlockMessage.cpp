@@ -5,12 +5,28 @@
 #include "Steering.h"
 #include "SteeringComponent.h"
 #include "FlockingSteering.h"
+#include "DataLoader.h"
 #include <vector>
 FlockMessage::FlockMessage(FlockParameter param, float increment)
 	:GameMessage(FLOCK_MESSAGE)
 	, mParam(param)
 	, mIncrement(increment)
 {
+}
+
+FlockMessage::FlockMessage(FlockParameter param, bool shouldIncrease)
+	:GameMessage(FLOCK_MESSAGE)
+	,mParam(param)
+{
+	if (mParam < COHESION_RADIUS) { //if adjusting a factor
+		mIncrement = gpGame->getDataLoader()->getFactorIncrease();
+	}
+	else { //adjusting a radius.
+		mIncrement = gpGame->getDataLoader()->getRadiusIncrease();
+	}
+	if (!shouldIncrease) { //decreasing
+		mIncrement *= -1;
+	}
 }
 
 FlockMessage::~FlockMessage()
@@ -30,7 +46,6 @@ void FlockMessage::process()
 			unitSteering.push_back(fs);
 		}
 	}
-	delete fs;
 
 
 	//==Incremement values==//
@@ -81,4 +96,6 @@ void FlockMessage::process()
 		std::cout << "Error in Flock Message";
 	}
 	}
+	gpGame->getDataLoader()->updateFlockingData();
+	//this updates it for the UI display in game.
 }

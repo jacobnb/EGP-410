@@ -12,16 +12,16 @@ FlockingSteering::FlockingSteering(const UnitID & ownerID)
 	setOwnerID(ownerID);
 	DataLoader* dl = gpGame->getDataLoader();
 	mpAlignSteer = new AlignSteering(ownerID
-	, dl->getStartingAlignmentRadius());
+	, dl->getAlignmentRadius());
 	mpCohesionSteer = new CohesionSteering(ownerID
-	, dl->getStartingCohesionRadius());
+	, dl->getCohesionRadius());
 	mpSeparationSteer = new SeparationSteering(ownerID
-	, dl->getStartingSeparationRadius());
+	, dl->getSeparationRadius());
 	mpWanderSteer = new WanderSteering(ownerID);
-	mCohesionMult = dl->getStartingCohesionFactor();
-	mSeparationMult = dl->getStartingSeparationFactor();
-	mAlignMult = dl->getStartingAlignmentFactor();
-	mWanderMult = dl->getStartingWanderFactor();
+	mCohesionMult = dl->getCohesionFactor();
+	mSeparationMult = dl->getSeparationFactor();
+	mAlignMult = dl->getAlignmentFactor();
+	mWanderMult = dl->getWanderFactor();
 }
 
 FlockingSteering::~FlockingSteering()

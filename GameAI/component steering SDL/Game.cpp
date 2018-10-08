@@ -18,6 +18,7 @@
 #include "ComponentManager.h"
 #include "UnitManager.h"
 #include "DataLoader.h"
+#include "FlockingSteering.h"
 Game* gpGame = NULL;
 
 const int WIDTH = 1024;
@@ -178,7 +179,10 @@ void Game::processLoop()
 
 	//draw units
 	mpUnitManager->drawAll();
-
+	
+	//draw flock UI
+	adjustFlockUI();
+	
 	mpInputSystem->update();
 	//test of fill region
 	mpGraphicsSystem->fillRegion(*pDest, Vector2D(300, 300), Vector2D(500, 500), RED_COLOR);
@@ -231,6 +235,64 @@ void Game::spawnTenBoids()
 			pUnit->getPositionComponent()->setScreenWrap(true);
 		}
 	}
+}
+
+void Game::adjustFlockUI()
+{
+	float xPosit = 20;
+	float yPosit = 600;
+	float yIncrement = -30;
+
+	std::string toWrite = "R -- Cohesion = ";
+	toWrite += truncateFloat(mpDataLoader->getCohesionFactor());
+	toWrite += " ++ T";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "F -- Separation = ";
+	toWrite += truncateFloat(mpDataLoader->getSeparationFactor());
+	toWrite+= " ++ G";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "V -- Alignment = ";
+	toWrite += truncateFloat(mpDataLoader->getAlignmentFactor());
+	toWrite +=  " ++ B";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "Y -- Wander = ";
+	toWrite += truncateFloat(mpDataLoader->getWanderFactor());
+	toWrite += " ++ U";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "H -- Cohesion = ";
+	toWrite += truncateFloat(mpDataLoader->getCohesionRadius());
+	toWrite += " ++ J";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "N -- Alignment = ";
+	toWrite += truncateFloat(mpDataLoader->getAlignmentRadius());
+	toWrite += " ++ M";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "I -- Separation = ";
+	toWrite += truncateFloat(mpDataLoader->getSeparationRadius());
+	toWrite += " ++ O";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+
+	yPosit -= yIncrement;
+	toWrite = "";
+	mpGraphicsSystem->writeText(*mpFont, xPosit, yPosit, toWrite, BLACK_COLOR);
+}
+
+std::string Game::truncateFloat(float num)
+{ //truncate to two decimal places and return;
+	std::string str = std::to_string(num);
+	return str.substr(0, str.length() - 4);
 }
 
 

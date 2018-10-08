@@ -46,33 +46,46 @@ void DataLoader::loadData()
 
 void DataLoader::writeData()
 {
+	updateFlockingData();
+	
+	std::ofstream dataStream;
+	dataStream.open(mFilePath);
+	assert(dataStream.is_open());
+	dataStream << "{\n";
+	dataStream << "\"Cohesion Factor\": " << mCohesionFactor << ",\n";
+	dataStream << "\"Separation Factor\": " << mSeparationFactor << ",\n";
+	dataStream << "\"Alignment Factor\": " << mAlignmentFactor << ",\n";
+	dataStream << "\"Wander Factor\": " << mWanderFactor << ",\n";
+	dataStream << "\"Cohesion Radius\": " << mCohesionRadius << ",\n";
+	dataStream << "\"Alignment Radius\": " << mAlignmentRadius << ",\n";
+	dataStream << "\"Separation Radius\": " << mSeparationRadius << ",\n";
+	dataStream << "}";
+	dataStream.close();
+}
+
+void DataLoader::updateFlockingData()
+{
 	std::vector<Unit*>::iterator iter;
 	std::vector<Unit*> units = gpGame->getUnitManager()->getAllUnits();
 	iter = units.begin();
 	while ((*iter)->getSteeringComponent()->getType() != Steering::FLOCK) {
 		iter++;
 		if (iter == units.end()) {
-			return; 
+			return;
 			//if no valid units found then write nothing.
 		}
 	}
 	//All flocking steerings should have the same values, so only need the first one.
 	FlockingSteering* flockSteering = (*iter)->getSteeringComponent()->getFlockingSteering();
 	assert(flockSteering);
-	
-	std::ofstream dataStream;
-	dataStream.open(mFilePath);
-	assert(dataStream.is_open());
-	dataStream << "{\n";
-	dataStream << "\"Cohesion Factor\": " << flockSteering->getCohesionFactor() << ",\n";
-	dataStream << "\"Separation Factor\": " << flockSteering->getSeparationFactor() << ",\n";
-	dataStream << "\"Alignment Factor\": " << flockSteering->getAlignmentFactor() << ",\n";
-	dataStream << "\"Wander Factor\": " << flockSteering->getWanderFactor() << ",\n";
-	dataStream << "\"Cohesion Radius\": " << flockSteering->getCohesionRadius() << ",\n";
-	dataStream << "\"Alignment Radius\": " << flockSteering->getAlignRadius() << ",\n";
-	dataStream << "\"Separation Radius\": " << flockSteering->getSeparationRadius() << ",\n";
-	dataStream << "}";
-	dataStream.close();
+
+	mCohesionFactor = flockSteering->getCohesionFactor();
+	mSeparationFactor = flockSteering->getSeparationFactor();
+	mAlignmentFactor = flockSteering->getAlignmentFactor();
+	mWanderFactor = flockSteering->getWanderFactor();
+	mCohesionRadius = flockSteering->getCohesionRadius();
+	mAlignmentRadius = flockSteering->getAlignRadius();
+	mSeparationRadius = flockSteering->getSeparationRadius();
 }
 
 float DataLoader::stringToFloat(std::string str)

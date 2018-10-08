@@ -53,6 +53,7 @@ public:
 	void spawnEnemyAtRandomLoc();
 	void deleteRandomEnemyUnit();
 	void spawnTenBoids();
+	void adjustFlockUI();
 private:
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;
@@ -67,6 +68,8 @@ private:
 	DataLoader* mpDataLoader;
 	bool mShouldExit;
 
+
+	std::string truncateFloat(float num);
 	//should be somewhere else
 	GraphicsBufferID mBackgroundBufferID = "woods";
 	GraphicsBufferID mPlayerIconBufferID = "player";

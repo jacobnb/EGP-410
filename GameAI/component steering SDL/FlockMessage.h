@@ -14,6 +14,7 @@ enum FlockParameter {
 class FlockMessage : public GameMessage {
 public:
 	FlockMessage(FlockParameter param, float increment);
+	FlockMessage(FlockParameter param, bool shouldIncrease);
 	~FlockMessage();
 	
 	void process();
