@@ -32,6 +32,7 @@ FlockingSteering::~FlockingSteering()
 	delete mpCohesionSteer;
 	delete mpSeparationSteer;
 	delete mpWanderSteer;
+	delete mpFaceSteer;
 }
 
 void FlockingSteering::incrementCohesionRadius(float toAdd)
@@ -89,7 +90,8 @@ Steering * FlockingSteering::getSteering()
 	auto wanderRot = mpWanderSteer->getSteering()->getData().rotAcc;
 	data.rotAcc = alignRot
 		+ wanderRot; //this isn't perfect, but it works well enough
-	
+	//it does work better than blending the rotation.
+
 	auto rotAcc = abs(data.rotAcc);
 	if (rotAcc > data.maxRotAcc) {
 		data.rotAcc = data.rotAcc / rotAcc;
