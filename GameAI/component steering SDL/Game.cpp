@@ -66,12 +66,13 @@ bool Game::init()
 	mpGraphicsBufferManager = new GraphicsBufferManager(mpGraphicsSystem);
 	mpSpriteManager = new SpriteManager();
 
+	mpDataLoader = new DataLoader();
+	mpDataLoader->loadData();
 
 	mpMessageManager = new GameMessageManager();
 	mpInputSystem = new InputSystem();
 	mpComponentManager = new ComponentManager(MAX_UNITS);
 	mpUnitManager = new UnitManager(MAX_UNITS);
-	mpDataLoader = new DataLoader();
 
 	//load buffers
 	mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID,"wallpaper.bmp");

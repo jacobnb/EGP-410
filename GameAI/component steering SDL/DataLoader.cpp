@@ -5,6 +5,11 @@
 #include <vector>
 #include <string>
 #include "FlockMessage.h"
+#include "Game.h"
+#include "UnitManager.h"
+#include "Unit.h"
+#include "FlockingSteering.h"
+#include "SteeringComponent.h"
 
 void DataLoader::loadData()
 {
@@ -14,26 +19,31 @@ void DataLoader::loadData()
 
 	std::string str;
 
+	//==read data into vars==//
 	std::getline(dataStream, str, ':');
 	std::getline(dataStream, str, ',');
-	std::string mBikeOnePath = str;
-
-	//Cohesion Factor
-	//Separation Factor
-	//Alignment Factor
-	//Wander Factor
-	//Cohesion Radius
-	//Alignment Radius
-	//Separation Radius
-
+	mCohesionFactor = stringToFloat(str);
+	std::getline(dataStream, str, ':');
+	std::getline(dataStream, str, ',');
+	mSeparationFactor = stringToFloat(str);
+	std::getline(dataStream, str, ':');
+	std::getline(dataStream, str, ',');
+	mAlignmentFactor = stringToFloat(str);
+	std::getline(dataStream, str, ':');
+	std::getline(dataStream, str, ',');
+	mWanderFactor = stringToFloat(str);
+	std::getline(dataStream, str, ':');
+	std::getline(dataStream, str, ',');
+	mCohesionRadius = stringToFloat(str);
+	std::getline(dataStream, str, ':');
+	std::getline(dataStream, str, ',');
+	mAlignmentRadius= stringToFloat(str);
+	std::getline(dataStream, str, ':');
+	std::getline(dataStream, str, ',');
+	mSeparationRadius= stringToFloat(str);
 }
 
-#include "Game.h"
-#include "UnitManager.h"
-#include "Unit.h"
-#include "FlockingSteering.h"
-#include "SteeringComponent.h"
-#include <vector>
+
 void DataLoader::writeData()
 {
 	std::vector<Unit*>::iterator iter;
@@ -49,30 +59,29 @@ void DataLoader::writeData()
 	//All flocking steerings should have the same values, so only need the first one.
 	FlockingSteering* flockSteering = (*iter)->getSteeringComponent()->getFlockingSteering();
 	assert(flockSteering);
-
 	
 	std::ofstream dataStream;
 	dataStream.open(mFilePath);
 	assert(dataStream.is_open());
 	dataStream << "{\n";
-	dataStream << "\"Cohesion Factor\": " << flockSteering->getCohesionFactor() << ",\n";
+	dataStream << "\"Cohesion Factor\":" << flockSteering->getCohesionFactor() << ",\n";
 	dataStream << "\"Separation Factor\": " << flockSteering->getSeparationFactor() << ",\n";
-	dataStream << "\"Alignment Factor\": " << flockSteering->getAlignmentFactor() << ",\n";
-	dataStream << "\"Wander Factor\": " << flockSteering->getWanderFactor() << ",\n";
-	dataStream << "\"Cohesion Radius\": " << flockSteering->getCohesionRadius() << ",\n";
-	dataStream << "\"Alignment Radius\": " << flockSteering->getAlignRadius() << ",\n";
-	dataStream << "\"Separation Radius\": " << flockSteering->getSeparationRadius() << ",\n";
+	dataStream << "\"Alignment Factor\":" << flockSteering->getAlignmentFactor() << ",\n";
+	dataStream << "\"Wander Factor\":" << flockSteering->getWanderFactor() << ",\n";
+	dataStream << "\"Cohesion Radius\":" << flockSteering->getCohesionRadius() << ",\n";
+	dataStream << "\"Alignment Radius\":" << flockSteering->getAlignRadius() << ",\n";
+	dataStream << "\"Separation Radius\":" << flockSteering->getSeparationRadius() << ",\n";
 	dataStream << "}";
 	dataStream.close();
 }
 
-int DataLoader::stoi(std::string str)
+float DataLoader::stringToFloat(std::string str)
 {
-	int num = 0;
+	float num = 0;
 	try
 		//https://stackoverflow.com/questions/18534036/checking-the-int-limits-in-stoi-function-in-c
 	{
-		num = stoi(str);
+		num = std::stof(str);
 	}
 	catch (std::invalid_argument& e)
 	{
@@ -86,5 +95,5 @@ int DataLoader::stoi(std::string str)
 		std::cout << "Error in data loading";
 		return false;
 	}
-	return 0;
+	return num;
 }
