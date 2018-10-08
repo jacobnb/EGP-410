@@ -64,13 +64,13 @@ void DataLoader::writeData()
 	dataStream.open(mFilePath);
 	assert(dataStream.is_open());
 	dataStream << "{\n";
-	dataStream << "\"Cohesion Factor\":" << flockSteering->getCohesionFactor() << ",\n";
+	dataStream << "\"Cohesion Factor\": " << flockSteering->getCohesionFactor() << ",\n";
 	dataStream << "\"Separation Factor\": " << flockSteering->getSeparationFactor() << ",\n";
-	dataStream << "\"Alignment Factor\":" << flockSteering->getAlignmentFactor() << ",\n";
-	dataStream << "\"Wander Factor\":" << flockSteering->getWanderFactor() << ",\n";
-	dataStream << "\"Cohesion Radius\":" << flockSteering->getCohesionRadius() << ",\n";
-	dataStream << "\"Alignment Radius\":" << flockSteering->getAlignRadius() << ",\n";
-	dataStream << "\"Separation Radius\":" << flockSteering->getSeparationRadius() << ",\n";
+	dataStream << "\"Alignment Factor\": " << flockSteering->getAlignmentFactor() << ",\n";
+	dataStream << "\"Wander Factor\": " << flockSteering->getWanderFactor() << ",\n";
+	dataStream << "\"Cohesion Radius\": " << flockSteering->getCohesionRadius() << ",\n";
+	dataStream << "\"Alignment Radius\": " << flockSteering->getAlignRadius() << ",\n";
+	dataStream << "\"Separation Radius\": " << flockSteering->getSeparationRadius() << ",\n";
 	dataStream << "}";
 	dataStream.close();
 }

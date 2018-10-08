@@ -6,14 +6,22 @@
 #include "Game.h"
 #include "UnitManager.h"
 #include "Unit.h"
-
+#include "DataLoader.h"
 FlockingSteering::FlockingSteering(const UnitID & ownerID)
 {
 	setOwnerID(ownerID);
-	mpAlignSteer = new AlignSteering(ownerID);
-	mpCohesionSteer = new CohesionSteering(ownerID);
-	mpSeparationSteer = new SeparationSteering(ownerID);
+	DataLoader* dl = gpGame->getDataLoader();
+	mpAlignSteer = new AlignSteering(ownerID
+	, dl->getStartingAlignmentRadius());
+	mpCohesionSteer = new CohesionSteering(ownerID
+	, dl->getStartingCohesionRadius());
+	mpSeparationSteer = new SeparationSteering(ownerID
+	, dl->getStartingSeparationRadius());
 	mpWanderSteer = new WanderSteering(ownerID);
+	mCohesionMult = dl->getStartingCohesionFactor();
+	mSeparationMult = dl->getStartingSeparationFactor();
+	mAlignMult = dl->getStartingAlignmentFactor();
+	mWanderMult = dl->getStartingWanderFactor();
 }
 
 FlockingSteering::~FlockingSteering()
