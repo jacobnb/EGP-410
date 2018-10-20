@@ -46,7 +46,7 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 
 	//current node to get connections from?
 	DijkstraNode* pCurrentNode = nullptr;
-	//not sure what this is
+	//end node added.
 	bool toNodeAdded = false;
 
 	//might be faster to compare nodeID? two function calls vs dynamic_cast to base class
@@ -60,18 +60,38 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 		//get connections from current Node
 		std::vector<Connection*> connections = mpGraph->getConnections(pCurrentNode->getId());
 
-		for (unsigned int i = 0; i < connections.size(); i++) {
+		for (unsigned int i = 0; i < connections.size(); i++) { //for each neighbor of current node
 			Connection* pConnection = connections[i];
+
+			//set up node.
 			DijkstraNode* pTempToNode = new DijkstraNode(connections[i]->getToNode());
 
+			pTempToNode->setCost(pConnection->getCost() + pCurrentNode->getCost());
+			pTempToNode->setPrevNode(pCurrentNode); // could also use connection->fromNode()
+
+			auto nodeIter = nodesToVisit.findNode(pTempToNode); //can't dereference since we haven't compared it to .end()
+			if (nodeIter != nodesToVisit.end()) {
+				if ((*nodeIter)->getCost() > pTempToNode->getCost()) {
+					//Can't set the iterator to pTempToNode, so copy values.
+					//This might not actually change the values in the queue.
+					(*nodeIter)->setCost(pTempToNode->getCost()); //set cost
+					(*nodeIter)->setPrevNode(pTempToNode->getPrevNode()); //set node
+				}
+				delete pTempToNode;
+				pTempToNode = (*nodeIter);
+			}
+
+			
+
+			
 			if (!toNodeAdded && //if end not found
 				!pPath->containsNode(pTempToNode) &&  //node is not in path
-				nodesToVisit.find(pTempToNode) == nodesToVisit.end()
+				nodesToVisit.findNode(pTempToNode) == nodesToVisit.end()
 				//node is not in nodesTovisit
 				) {
 				nodesToVisit.push(pTempToNode);
 
-				if (pTempToNode == pTo) { //found node, not 100% shortest path.
+				if (pTempToNode->getId() == pTo->getId()) { //found node, not 100% shortest path.
 					toNodeAdded = true;
 				}
 #ifdef VISUALIZE_PATH

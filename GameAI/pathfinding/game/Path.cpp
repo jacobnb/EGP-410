@@ -1,5 +1,5 @@
 #include "Path.h"
-
+#include "Node.h"
 Path::Path()
 {
 }
@@ -57,7 +57,7 @@ bool Path::containsNode( Node* pNode )
 
 	for( unsigned int i=0; i<mNodes.size(); i++ )
 	{
-		if( mNodes[i] == pNode )
+		if( mNodes[i]->getId() == pNode->getId())
 		{
 			retVal = true;
 			break;

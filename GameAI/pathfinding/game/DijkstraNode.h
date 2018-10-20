@@ -8,8 +8,9 @@ public:
 	~DijkstraNode();
 	inline void setCost(const float newCost) { mpCost = newCost; };
 	inline float getCost() { return mpCost; };
-	inline void setNode(const Node* prevNode) { mpPrevNode = prevNode; };
+	inline void setPrevNode(const Node* prevNode) { mpPrevNode = prevNode; };
+	inline const Node* getPrevNode() { return mpPrevNode; };
 private:
 	float mpCost; 
-	const Node* mpPrevNode;
+	const Node* mpPrevNode; //might have to convert this to a dijkstra node
 };

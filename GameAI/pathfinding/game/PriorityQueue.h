@@ -1,6 +1,8 @@
 //from first answer on https://stackoverflow.com/questions/16749723/how-i-can-find-value-in-priority-queue
 
 #include <queue>
+#include "Node.h"
+#include <cassert>
 template<
 	class T,
 	class Container = std::vector<T>,
@@ -19,10 +21,21 @@ public:
 		auto first = this->c.cbegin();
 		auto last = this->c.cend();
 		while (first != last) {
-			if (*first == val) return first;
+			if ((*first) == val) return first;
 			++first;
 		}
 		return last; 
+	}
+	const_iterator findNode(const Node* val) const
+	{ //This assumes that the iterator points to nodes.
+		//didn't overload find for extra clarity.
+		auto first = this->c.cbegin();
+		auto last = this->c.cend();
+		while (first != last) {
+			if (static_cast<Node*>(*first)->getId() == val->getId()) return first;
+			++first;
+		}
+		return last;
 	}
 	const_iterator end() const
 	{

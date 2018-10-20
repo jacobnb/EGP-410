@@ -14,5 +14,8 @@ DijkstraNode::DijkstraNode(const Node* node):
 }
 DijkstraNode::~DijkstraNode()
 {
+	//Dijkstra node doesn't create prevNode.
+	//delete mpPrevNode;
+	//nothing to delete in node.
 }
 

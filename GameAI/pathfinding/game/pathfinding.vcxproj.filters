@@ -132,9 +132,6 @@
     <ClInclude Include="DijkstraPathfinder.h">
       <Filter>Header Files\pathfinding\Dijkstra</Filter>
     </ClInclude>
-    <ClInclude Include="DijkstraGraph.h">
-      <Filter>Header Files\pathfinding\Dijkstra</Filter>
-    </ClInclude>
     <ClInclude Include="PriorityQueue.h">
       <Filter>Header Files\pathfinding</Filter>
     </ClInclude>
@@ -231,9 +228,6 @@
       <Filter>Source Files\pathfinding\Dijkstra</Filter>
     </ClCompile>
     <ClCompile Include="DijkstraPathfinder.cpp">
-      <Filter>Source Files\pathfinding\Dijkstra</Filter>
-    </ClCompile>
-    <ClCompile Include="DijkstraGraph.cpp">
       <Filter>Source Files\pathfinding\Dijkstra</Filter>
     </ClCompile>
   </ItemGroup>
