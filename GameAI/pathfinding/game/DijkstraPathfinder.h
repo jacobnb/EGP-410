@@ -16,11 +16,10 @@
 //	14 : previous[v] : = u
 //	15 : return previous[]
 
-//can inherit from node or make struct that has a node.
-//node needs to have cost.
-//node needs to have previous node
 
-//priority queue needs to compare cost https://stackoverflow.com/questions/16111337/declaring-a-priority-queue-in-c-with-a-custom-comparator
+//Astar graph is the same, just init with aStarNodes.
+//Need to be able to set distance to infinity, this can happen when copying nodes?
+//1. Create a Dijkstra Graph or hold Dijkstra nodes in graph
 //get connections from mpGraph.
 #include "GridPathfinder.h"
 

@@ -5,6 +5,7 @@
 #include "Game.h"
 #include <PerformanceTracker.h>
 #include <queue>
+#include "Compare.h"
 
 DijkstraPathfinder::DijkstraPathfinder(Graph * pGraph):
 	GridPathfinder(dynamic_cast<GridGraph*>(pGraph))
@@ -26,7 +27,7 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 {
 	gpPerformanceTracker->clearTracker("path");
 	gpPerformanceTracker->startTracking("path");
-	std::priority_queue<Node*> nodesToVisit;
-	nodesToVisit.push(pFrom);
+	std::priority_queue<DijkstraNode*, std::vector<DijkstraNode*>, Compare> nodesToVisit;
+	nodesToVisit.push(new DijkstraNode(pFrom));
 	return nullptr;
 }
