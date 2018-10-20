@@ -29,8 +29,8 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 	gpPerformanceTracker->clearTracker("path");
 	gpPerformanceTracker->startTracking("path");
 	//set up Open queue and add starting node.
-	PriorityQueue<DijkstraNode*, std::vector<DijkstraNode*>, Compare> nodesToVisit;
-	DijkstraNode* startNode = new DijkstraNode(pFrom);
+	PriorityQueue<Node*, std::vector<Node*>, Compare> nodesToVisit;
+	Node* startNode = pFrom;
 	startNode->setCost(0);
 	nodesToVisit.push(startNode);
 
@@ -45,7 +45,7 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 	Path* pPath = new Path();
 
 	//current node to get connections from?
-	DijkstraNode* pCurrentNode = nullptr;
+	Node* pCurrentNode = nullptr;
 	//end node added.
 	bool toNodeAdded = false;
 
@@ -55,7 +55,7 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 		nodesToVisit.pop(); //remove node, doesn't return it
 
 		//Not sure about this
-		pPath->addNode(pCurrentNode); //can pPath take DijkstraNode.
+		pPath->addNode(pCurrentNode); //can pPath take Node.
 
 		//get connections from current Node
 		std::vector<Connection*> connections = mpGraph->getConnections(pCurrentNode->getId());
@@ -64,8 +64,8 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 			Connection* pConnection = connections[i];
 
 			//set up node.
-			DijkstraNode* pTempToNode = new DijkstraNode(connections[i]->getToNode());
-
+			Node* pTempToNode = connections[i]->getToNode();
+			//can't do this anymore since they're pointing to the same thing. Also need to set distance to 0;
 			pTempToNode->setCost(pConnection->getCost() + pCurrentNode->getCost());
 			pTempToNode->setPrevNode(pCurrentNode); // could also use connection->fromNode()
 
@@ -77,7 +77,6 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 					(*nodeIter)->setCost(pTempToNode->getCost()); //set cost
 					(*nodeIter)->setPrevNode(pTempToNode->getPrevNode()); //set node
 				}
-				delete pTempToNode;
 				pTempToNode = (*nodeIter);
 			}
 
