@@ -97,6 +97,7 @@
     <ClInclude Include="DebugContent.h" />
     <ClInclude Include="DebugDisplay.h" />
     <ClInclude Include="DepthFirstPathfinder.h" />
+    <ClInclude Include="DijkstraGraph.h" />
     <ClInclude Include="DijkstraNode.h" />
     <ClInclude Include="DijkstraPathfinder.h" />
     <ClInclude Include="GameApp.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="PathfindingDebugContent.h" />
     <ClInclude Include="PathToMessage.h" />
+    <ClInclude Include="PriorityQueue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Color.cpp" />
@@ -129,6 +131,7 @@
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DebugDisplay.cpp" />
     <ClCompile Include="DepthFirstPathfinder.cpp" />
+    <ClCompile Include="DijkstraGraph.cpp" />
     <ClCompile Include="DijkstraNode.cpp" />
     <ClCompile Include="DijkstraPathfinder.cpp" />
     <ClCompile Include="GameApp.cpp" />

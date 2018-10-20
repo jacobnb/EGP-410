@@ -18,7 +18,7 @@
 
 
 //Astar graph is the same, just init with aStarNodes.
-//Need to be able to set distance to infinity, this can happen when copying nodes?
+//Need to be able to set distance to infinity, this can happen when copying nodes? yeah.
 //1. Create a Dijkstra Graph or hold Dijkstra nodes in graph
 //get connections from mpGraph.
 #include "GridPathfinder.h"

@@ -28,6 +28,12 @@
     <Filter Include="Source Files\pathfinding">
       <UniqueIdentifier>{474fbefa-c012-4187-954c-fdb12b4f06d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\pathfinding\Dijkstra">
+      <UniqueIdentifier>{7e15c79d-bf9f-41d0-979e-f3193c4a2d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pathfinding\Dijkstra">
+      <UniqueIdentifier>{82e22a9a-179d-4792-b0e6-d8ed23cc3e01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\Game.h">
@@ -114,16 +120,22 @@
     <ClInclude Include="KeydownMessage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DijkstraPathfinder.h">
-      <Filter>Header Files\pathfinding</Filter>
-    </ClInclude>
     <ClInclude Include="AStarPathfinder.h">
       <Filter>Header Files\pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="DijkstraNode.h">
+    <ClInclude Include="Compare.h">
       <Filter>Header Files\pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="Compare.h">
+    <ClInclude Include="DijkstraNode.h">
+      <Filter>Header Files\pathfinding\Dijkstra</Filter>
+    </ClInclude>
+    <ClInclude Include="DijkstraPathfinder.h">
+      <Filter>Header Files\pathfinding\Dijkstra</Filter>
+    </ClInclude>
+    <ClInclude Include="DijkstraGraph.h">
+      <Filter>Header Files\pathfinding\Dijkstra</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueue.h">
       <Filter>Header Files\pathfinding</Filter>
     </ClInclude>
   </ItemGroup>
@@ -212,14 +224,17 @@
     <ClCompile Include="KeydownMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DijkstraPathfinder.cpp">
-      <Filter>Source Files\pathfinding</Filter>
-    </ClCompile>
     <ClCompile Include="AStarPathfinder.cpp">
       <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
     <ClCompile Include="DijkstraNode.cpp">
-      <Filter>Source Files\pathfinding</Filter>
+      <Filter>Source Files\pathfinding\Dijkstra</Filter>
+    </ClCompile>
+    <ClCompile Include="DijkstraPathfinder.cpp">
+      <Filter>Source Files\pathfinding\Dijkstra</Filter>
+    </ClCompile>
+    <ClCompile Include="DijkstraGraph.cpp">
+      <Filter>Source Files\pathfinding\Dijkstra</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
