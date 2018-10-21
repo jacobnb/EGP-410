@@ -4,7 +4,6 @@
 #include "GridGraph.h"
 #include "Game.h"
 #include <PerformanceTracker.h>
-#include <queue>
 #include "PriorityQueue.h"
 #include "Compare.h"
 
@@ -37,12 +36,12 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 	//Will probably have to change this.
 #ifdef VISUALIZE_PATH
 	delete mpPath;
-	mVisitedNodes.clear();
+	mVisitedNodes.clear(); //This list seems useless, it is closed list rather than a visualization
 	mVisitedNodes.push_back(pFrom);
 #endif
 	
 	//create path?
-	Path* pPath = new Path();
+	Path* pPath = new Path(); //this is for visualization but also acts as the closed list. 
 
 	//current node to get connections from?
 	Node* pCurrentNode = nullptr;
@@ -50,12 +49,12 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 	bool toNodeAdded = false;
 
 	//might be faster to compare nodeID? two function calls vs dynamic_cast to base class
-	while(dynamic_cast<Node*>(pCurrentNode) != pTo && nodesToVisit.size() > 0){
+	while(pCurrentNode != pTo && nodesToVisit.size() > 0){
 		pCurrentNode = nodesToVisit.top(); //access the top element
 		nodesToVisit.pop(); //remove node, doesn't return it
 
 		//Not sure about this
-		pPath->addNode(pCurrentNode); //can pPath take Node.
+		pPath->addNode(pCurrentNode); 
 
 		//get connections from current Node
 		std::vector<Connection*> connections = mpGraph->getConnections(pCurrentNode->getId());
@@ -65,27 +64,23 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 
 			//set up node.
 			Node* pTempToNode = connections[i]->getToNode();
-			//can't do this anymore since they're pointing to the same thing. Also need to set distance to 0;
-			pTempToNode->setCost(pConnection->getCost() + pCurrentNode->getCost());
-			pTempToNode->setPrevNode(pCurrentNode); // could also use connection->fromNode()
+			auto cost = pConnection->getCost() + pCurrentNode->getCost();
 
-			auto nodeIter = nodesToVisit.findNode(pTempToNode); //can't dereference since we haven't compared it to .end()
-			if (nodeIter != nodesToVisit.end()) {
-				if ((*nodeIter)->getCost() > pTempToNode->getCost()) {
-					//Can't set the iterator to pTempToNode, so copy values.
-					//This might not actually change the values in the queue.
-					(*nodeIter)->setCost(pTempToNode->getCost()); //set cost
-					(*nodeIter)->setPrevNode(pTempToNode->getPrevNode()); //set node
+			if (nodesToVisit.find(pTempToNode) != nodesToVisit.end()) {
+				if (pTempToNode->getCost() > cost) { //if shorter path has been found.
+					pTempToNode->setCost(cost); //set cost
+					pTempToNode->setPrevNode(pCurrentNode); //set previous node
 				}
-				pTempToNode = (*nodeIter);
 			}
-
-			
-
+			else if (!pPath->containsNode(pTempToNode) ){
+				//once node is not in to visit list or in path.
+				pTempToNode->setCost(cost);
+				pTempToNode->setPrevNode(pCurrentNode);
+			}
 			
 			if (!toNodeAdded && //if end not found
 				!pPath->containsNode(pTempToNode) &&  //node is not in path
-				nodesToVisit.findNode(pTempToNode) == nodesToVisit.end()
+				nodesToVisit.find(pTempToNode) == nodesToVisit.end()
 				//node is not in nodesTovisit
 				) {
 				nodesToVisit.push(pTempToNode);
@@ -99,6 +94,20 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 			}
 		}
 	}
+
+	Node* lastPathNode = pTo;
+#ifdef VISUALIZE_PATH
+	delete pPath;
+	pPath = new Path();
+	while (lastPathNode != pFrom) {
+		pPath->addNode(lastPathNode);
+		lastPathNode = lastPathNode->getPrevNode();
+		if (lastPathNode == nullptr) {
+			lastPathNode = pFrom;
+		}
+	}
+#endif
+
 	gpPerformanceTracker->stopTracking("path");
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 

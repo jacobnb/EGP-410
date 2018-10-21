@@ -32,7 +32,7 @@ public:
 		auto first = this->c.cbegin();
 		auto last = this->c.cend();
 		while (first != last) {
-			if (static_cast<Node*>(*first)->getId() == val->getId()) return first;
+			if ((*first)->getId() == val->getId()) return first;
 			++first;
 		}
 		return last;

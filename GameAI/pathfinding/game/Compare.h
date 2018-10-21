@@ -1,7 +1,7 @@
 #pragma once
 #include "DijkstraNode.h"
 //This is for the priority queue
-
+//https://stackoverflow.com/questions/16749723/how-i-can-find-value-in-priority-queue
 class Compare {
 public:
 	//priority queue prioritizes largest. 
@@ -10,4 +10,11 @@ public:
 	{ //return LHS > RHS
 		return node1->getCost() > node2->getCost();
 	};
+};
+
+class CompareAStar {
+public:
+	inline bool operator() (Node* lhs, Node* rhs) {
+		return lhs->getTotalCost() > rhs->getTotalCost();
+	}
 };

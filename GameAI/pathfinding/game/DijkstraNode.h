@@ -2,6 +2,7 @@
 #include "Node.h"
 class DijkstraNode : public Node {
 public:
+//This isn't being used because I decided to add the extra variables into Node for simplicity.
 	DijkstraNode(const NODE_ID& id);
 	DijkstraNode(const Node* node); 
 	//This is essentially a copy constructor, would be faster not to copy if possible.

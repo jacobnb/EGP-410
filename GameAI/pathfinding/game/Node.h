@@ -14,13 +14,16 @@ public:
 
 	const NODE_ID& getId() const {return mId;};
 
-	inline void setCost(const float newCost) { mpCost = newCost; };
-	inline float getCost() { return mpCost; };
-	inline void setPrevNode(const Node* prevNode) { mpPrevNode = prevNode; };
-	inline const Node* getPrevNode() { return mpPrevNode; };
+	inline void setCost(const float newCost) { mCost = newCost; };
+	inline float getCost() { return mCost; };
+	inline void setPrevNode(Node* prevNode) { mpPrevNode = prevNode; };
+	inline Node* getPrevNode() { return mpPrevNode; };
+	inline void setHeuristic(float cost) { mHeuristicCost = cost; };
+	inline float getTotalCost() { return mHeuristicCost + mCost; };
 
 private:
 	const NODE_ID mId;
-	float mpCost;
-	const Node* mpPrevNode;
+	float mCost;
+	float mHeuristicCost;
+	Node* mpPrevNode;
 };
