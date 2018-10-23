@@ -17,7 +17,7 @@ public:
 	inline void setCost(const float newCost) { mCost = newCost; };
 	inline float getCost() { return mCost; };
 	inline void setPrevNode(Node* prevNode) { mpPrevNode = prevNode; };
-	inline Node* getPrevNode() { return mpPrevNode; };
+	inline Node* getPrevNode() { return mpPrevNode ? mpPrevNode : NULL; };
 	inline void setHeuristic(float cost) { mHeuristicCost = cost; };
 	inline float getTotalCost() { return mHeuristicCost + mCost; };
 

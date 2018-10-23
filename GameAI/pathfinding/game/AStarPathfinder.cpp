@@ -43,19 +43,20 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 #endif
 
 	//create path?
-	Path* pPath = new Path(); //this is for visualization but also acts as the closed list. 
+	Path* pPath = new Path(); 
+	//this is for visualization but also acts as the closed list because that's how it's done in the depth first pathfinder
 
 	//current node to get connections from?
 	Node* pCurrentNode = nullptr;
 	//end node added.
 	bool toNodeAdded = false;
 
-	//might be faster to compare nodeID? two function calls vs dynamic_cast to base class
+	//Start iterating.
 	while (pCurrentNode != pTo && nodesToVisit.size() > 0) {
 		pCurrentNode = nodesToVisit.top(); //access the top element
 		nodesToVisit.pop(); //remove node, doesn't return it
 
-		//Not sure about this
+		
 		pPath->addNode(pCurrentNode);
 
 		//get connections from current Node
@@ -93,7 +94,7 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 
 
 
-
+			//Add node to the open list
 			if (!toNodeAdded && //if end not found
 				!pPath->containsNode(pTempToNode) &&  //node is not in path
 				nodesToVisit.find(pTempToNode) == nodesToVisit.end()
@@ -113,16 +114,16 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 
 	Node* lastPathNode = pTo;
 #ifdef VISUALIZE_PATH
-	//delete pPath;
-	//pPath = new Path();
-	//while (lastPathNode != pFrom) {
-	//	pPath->addNode(lastPathNode);
-	//	lastPathNode = lastPathNode->getPrevNode();
-	//	//emergency case
-	//	if (lastPathNode == nullptr) {
-	//		lastPathNode = pFrom;
-	//	}
-	//}
+	delete pPath;
+	pPath = new Path();
+	while (lastPathNode != pFrom) {
+		pPath->addNode(lastPathNode);
+		lastPathNode = lastPathNode->getPrevNode();
+		//emergency case
+		if (lastPathNode == nullptr) {
+			lastPathNode = pFrom;
+		}
+	}
 #endif
 
 	gpPerformanceTracker->stopTracking("path");
