@@ -2,7 +2,7 @@
 [Github Tag](https://github.com/jacobnb/EGP-410/tree/Assignment3)
 
 # To compile and link the project:
-1. open EGP-410\GameAI\component steering SDL\steering.sln using Visual Studio
+1. open EGP-410\GameAI\pathfinding\game\pathfinding.sln using Visual Studio
 2. Compile using visual studio. either Build > Build Solution 
 or click on the "Local Windows Debugger" button at the top of the screen
 3. I haven't found any linking or targetting problems on the lab computers, 
