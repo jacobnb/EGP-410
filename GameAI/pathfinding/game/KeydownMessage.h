@@ -12,6 +12,8 @@ enum KeyType { //using this because Dean required it last year for abstraction;
 	KEY_ENTER = SDL_SCANCODE_RETURN,
 	KEY_ESCAPE, KEY_BACKSPACE, KEY_TAB, KEY_SPACE, KEY_MINUS, KEY_EQUALS, KEY_LEFTBRACKET, KEY_RIGHTBRACKET, KEY_BACKSLASH,
 };
+
+//==Message fired on keypress, interprets keyboard input==//
 class KeydownMessage :public GameMessage
 {
 public:

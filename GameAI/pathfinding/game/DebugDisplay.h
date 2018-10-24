@@ -6,6 +6,7 @@
 class DebugContent;
 class GraphicsBuffer;
 
+//==Display Debug Content==//
 class DebugDisplay:public Trackable
 {
 public:

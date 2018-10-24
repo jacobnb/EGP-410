@@ -11,6 +11,7 @@ class Grid;
 
 #define VISUALIZE_PATH 1
 
+//==Base pathfinder class==//
 class Pathfinder:public Trackable
 {
 public:

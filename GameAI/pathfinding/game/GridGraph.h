@@ -4,6 +4,7 @@
 
 class Grid;
 
+//==Graph that is in a grid shape, used for all current pathfinding.==//
 class GridGraph:public Graph
 {
 public:

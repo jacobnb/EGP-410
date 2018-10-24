@@ -1,7 +1,9 @@
 #pragma once
-#include "DijkstraNode.h"
+
+
 //This is for the priority queue
 //https://stackoverflow.com/questions/16749723/how-i-can-find-value-in-priority-queue
+//===Comparison class to use with the priority queue for Dijkstra===//
 class Compare {
 public:
 	//priority queue prioritizes largest. 
@@ -12,6 +14,7 @@ public:
 	};
 };
 
+//===Comparison class to use with the priority queue for A*===//
 class CompareAStar {
 public:
 	inline bool operator() (Node* lhs, Node* rhs) {

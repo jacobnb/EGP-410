@@ -9,6 +9,7 @@ class Graph;
 class GraphicsBuffer;
 class Grid;
 
+//==Find a path using DFS (or BFS) between two nodes==//
 class DepthFirstPathfinder:public GridPathfinder
 {
 public:

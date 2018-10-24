@@ -10,7 +10,7 @@
 #include "Grid.h"
 #include "Vector2D.h"
 
-AStarPathfinder::AStarPathfinder(Graph * pGraph):
+AStarPathfinder::AStarPathfinder(Graph * pGraph) :
 	GridPathfinder(dynamic_cast<GridGraph*>(pGraph))
 {
 #ifdef VISUALIZE_PATH
@@ -35,7 +35,6 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 	startNode->setCost(0);
 	nodesToVisit.push(startNode);
 
-	//Will probably have to change this.
 #ifdef VISUALIZE_PATH
 	delete mpPath;
 	mVisitedNodes.clear(); //This list seems useless, it is closed list rather than a visualization
@@ -43,7 +42,7 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 #endif
 
 	//create path?
-	Path* pPath = new Path(); 
+	Path* pPath = new Path();
 	//this is for visualization but also acts as the closed list because that's how it's done in the depth first pathfinder
 
 	//current node to get connections from?
@@ -56,7 +55,6 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 		pCurrentNode = nodesToVisit.top(); //access the top element
 		nodesToVisit.pop(); //remove node, doesn't return it
 
-		
 		pPath->addNode(pCurrentNode);
 
 		//get connections from current Node
@@ -91,7 +89,6 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 				pTempToNode->setHeuristic(hCost);
 				pTempToNode->setPrevNode(pCurrentNode);
 			}
-
 
 
 			//Add node to the open list
@@ -130,7 +127,11 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
+	if (pPath->getNumNodes() == 0) {
+		std::cout << "No Nodes in Path";
+	}
 	mpPath = pPath;
+
 #endif
 	return pPath;
 }
@@ -139,7 +140,7 @@ float AStarPathfinder::heuristic(Node * pFrom, Node * pTo)
 {
 	Grid* pGrid = dynamic_cast<GameApp*>(gpGame)->getGrid();
 	Vector2D diff = pGrid->getULCornerOfSquare(pFrom->getId()) -
-	pGrid->getULCornerOfSquare(pTo->getId());
+		pGrid->getULCornerOfSquare(pTo->getId());
 
 	return diff.getLength();
 }

@@ -10,6 +10,7 @@ enum MessageType
 	KEYDOWN_MESSAGE,
 };
 
+//==Base Game message used in messaging system==//
 class GameMessage: public Trackable
 {
 public:

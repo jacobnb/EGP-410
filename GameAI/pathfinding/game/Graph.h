@@ -7,6 +7,7 @@
 
 class Connection;
 
+//==Holds the nodes and connections for the pathfinding graph==//
 class Graph:public Trackable
 {
 public:

@@ -4,6 +4,7 @@
 
 class GridPathfinder;
 
+//==Stores Debug content about the pathfinder==//
 class PathfindingDebugContent:public DebugContent
 {
 public:

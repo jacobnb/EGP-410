@@ -67,8 +67,9 @@ Path* DepthFirstPathfinder::findPath( Node* pFrom, Node* pTo )
 				!pPath->containsNode( pTempToNode ) && 
 				find(nodesToVisit.begin(), nodesToVisit.end(), pTempToNode ) == nodesToVisit.end() )
 			{
-				//nodesToVisit.push_front( pTempToNode );//uncomment me for depth-first search
-				nodesToVisit.push_back( pTempToNode );//uncomment me for breadth-first search
+				nodesToVisit.push_front( pTempToNode );//uncomment me for depth-first search
+				//nodesToVisit.push_back( pTempToNode );//uncomment me for breadth-first search
+				pTempToNode->setPrevNode(pCurrentNode);
 				if( pTempToNode == pTo )
 				{
 					toNodeAdded = true;
@@ -85,6 +86,17 @@ Path* DepthFirstPathfinder::findPath( Node* pFrom, Node* pTo )
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
+	Node* lastPathNode = pTo;
+	delete pPath;
+	pPath = new Path();
+	while (lastPathNode != pFrom) {
+		pPath->addNode(lastPathNode);
+		lastPathNode = lastPathNode->getPrevNode();
+		//emergency case
+		if (lastPathNode == nullptr) {
+			lastPathNode = pFrom;
+		}
+	}
 	mpPath = pPath;
 #endif
 	return pPath;

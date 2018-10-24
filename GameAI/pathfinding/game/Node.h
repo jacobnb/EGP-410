@@ -5,6 +5,7 @@
 const int BAD_NODE_ID = -1;
 #define NODE_ID int
 
+//==Node class that defines nodes in the graph==//
 class Node:public Trackable
 {
 public:

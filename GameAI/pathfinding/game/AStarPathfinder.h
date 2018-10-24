@@ -6,6 +6,8 @@ class Path;
 class Graph;
 class GraphicsBuffer;
 class Grid;
+
+//Find a path using the A* algorithm.
 class AStarPathfinder : public GridPathfinder {
 public:
 	AStarPathfinder(Graph* pGraph);

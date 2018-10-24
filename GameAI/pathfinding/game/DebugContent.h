@@ -3,6 +3,7 @@
 #include <string>
 #include <Trackable.h>
 
+//==Base Debug Content class==//
 class DebugContent:public Trackable
 {
 public:

@@ -6,6 +6,8 @@ class Path;
 class Graph;
 class GraphicsBuffer;
 class Grid;
+
+//==Find a path between two nodes using Dijkstra==//
 class DijkstraPathfinder : public GridPathfinder {
 public:
 	DijkstraPathfinder(Graph* pGraph);

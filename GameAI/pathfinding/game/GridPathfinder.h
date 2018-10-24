@@ -6,6 +6,7 @@ class GridVisualizer;
 class GraphicsBuffer;
 class PathfindingDebugContent;
 
+//==Base pathfinder class to be used with the gridgraph grid to find paths==//
 class GridPathfinder:public Pathfinder
 {
 public:

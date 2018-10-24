@@ -5,6 +5,7 @@
 
 class GameMessage;
 
+//==Game messaging system manager==//
 class GameMessageManager: public Trackable
 {
 public:

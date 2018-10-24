@@ -5,6 +5,7 @@
 
 class Node;
 
+//==Wrapper for a vector that describes the path found by the pathfinders==//
 class Path:public Trackable
 {
 public:

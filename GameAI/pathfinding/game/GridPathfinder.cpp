@@ -54,10 +54,10 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 	static Color startColor = Color(1,255,128);
 	static Color stopColor = Color(1,128,255);
 
-	if( mpPath != NULL )
+	if( mpPath != NULL && mpPath->getNumNodes() > 0)
 	{
 		Color currentPathColor = pathColor;
-		int numNodes = mpPath->getNumNodes(); //when this is unsigned it fails the for statement later.
+		int unsigned numNodes = mpPath->getNumNodes(); //when this is unsigned it fails the for statement later.
 
 		/*for( int i=1; i<numNodes-1; i++ )
 		{
@@ -66,7 +66,7 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 		if (numNodes == 0) {
 			std::cout << "myError";
 		}
-		for (int i = 1; i < numNodes - 1; i++) //i < -1
+		for (unsigned int i = 1; i < numNodes - 1; i++) //i < -1
 		{
 			mpVisualizer->addColor(mpPath->peekNode(i)->getId(), currentPathColor);
 			float lerpVal = lerp(i, 0, numNodes);

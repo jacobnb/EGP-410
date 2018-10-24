@@ -20,6 +20,7 @@ DijkstraPathfinder::~DijkstraPathfinder()
 {
 #ifdef VISUALIZE_PATH
 	delete mpPath;
+	mpPath = NULL;
 #endif
 }
 
@@ -36,6 +37,7 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 	//Will probably have to change this.
 #ifdef VISUALIZE_PATH
 	delete mpPath;
+	mpPath = NULL;
 	mVisitedNodes.clear(); //This list seems useless, it is closed list rather than a visualization
 	mVisitedNodes.push_back(pFrom);
 #endif
@@ -112,7 +114,9 @@ Path * DijkstraPathfinder::findPath(Node * pFrom, Node * pTo)
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
-	mpPath = pPath;
+	if (pPath->getNumNodes() > 0) {
+		mpPath = pPath;
+	}
 #endif
 	return pPath;
 }

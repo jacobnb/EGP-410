@@ -1,8 +1,11 @@
+#pragma once
 //from first answer on https://stackoverflow.com/questions/16749723/how-i-can-find-value-in-priority-queue
 
 #include <queue>
 #include "Node.h"
 #include <cassert>
+
+//==Custom priority queue with find functions added==//
 template<
 	class T,
 	class Container = std::vector<T>,

@@ -5,22 +5,16 @@
 #include <string>
 
 
-
+//==Gets keyboard and mouse input then sends relevant messages==//
 class InputSystem: public Trackable
 {
 public:
 	InputSystem();
 	~InputSystem();
-
-	std::string getKeyState();
-	int getMouseState();
-	void update(); //used to fire mouse events
-	void update(int numEvents); //fires numEvents keyboard events.
-	void updateAll(); //fires keyboard events.
+	void update(); 
 	void clearQueue();
-	void stuffFromGame();
 	void updateMouseEvents();
 private:
 	int mXMouse, mYMouse;
-	//GameMessage
+	int mPrevX, mPrevY;
 };

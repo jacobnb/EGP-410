@@ -3,6 +3,7 @@
 #include <Trackable.h>
 class Node;
 
+//===Stores information about node connections===//
 class Connection:public Trackable
 {
 public:
@@ -18,3 +19,4 @@ private:
 	Node* mpTo;
 	float mCost;
 };
+

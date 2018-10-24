@@ -4,6 +4,7 @@
 
 #include "Vector2D.h"
 
+//==Message to generate a path based on click location==//
 class PathToMessage:public GameMessage
 {
 public:
