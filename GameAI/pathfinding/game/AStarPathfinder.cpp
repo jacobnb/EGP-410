@@ -27,6 +27,13 @@ AStarPathfinder::~AStarPathfinder()
 
 Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 {
+
+	//== This chunk of code handles if the user clicks on the black + ==//
+	if (!isEndNodeValid(pTo)) {
+		return nullptr;
+	}
+
+
 	gpPerformanceTracker->clearTracker("path");
 	gpPerformanceTracker->startTracking("path");
 	//set up Open queue and add starting node.

@@ -7,6 +7,8 @@
 #include "Color.h"
 #include <cassert>
 #include <iostream>
+#include "Connection.h"
+#include "Node.h"
 
 using namespace std;
 
@@ -82,3 +84,22 @@ void GridPathfinder::drawVisualization(Grid* pGrid, GraphicsBuffer* pDest)
 	mpVisualizer->draw(*pDest);
 }
 #endif
+bool GridPathfinder::isEndNodeValid(Node * endNode)
+{
+	std::vector<Connection*> connection = mpGraph->getConnections(endNode->getId());
+	if (connection.size() > 0) {
+		bool isValidNode = false;
+		std::vector<Connection*> connection2 = mpGraph->getConnections(connection[0]->getToNode()->getId());
+		auto iter = connection2.begin();
+		while (iter != connection2.end()) {
+			if ((*iter)->getToNode() == endNode) {
+				isValidNode = true;
+			}
+			++iter;
+		}
+		if (!isValidNode) {
+			return false;
+		}
+	}
+	return true;
+}

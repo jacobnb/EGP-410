@@ -25,6 +25,7 @@ protected:
 	std::vector<Node*> mVisitedNodes;
 	Path* mpPath;
 	GridVisualizer* mpVisualizer;
+	bool isEndNodeValid(Node* endNode);
 #endif
 
 	double mTimeElapsed;
