@@ -84,9 +84,11 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 			}
 			else if (pPath->containsNode(pTempToNode)) {
 				if (pTempToNode->getCost() > cost) { //if shorter path has been found.
+					pPath->removeNode(pTempToNode);
 					pTempToNode->setCost(cost);
 					pTempToNode->setHeuristic(hCost);
 					pTempToNode->setPrevNode(pCurrentNode);
+					
 				}
 			}
 			else if (!pPath->containsNode(pTempToNode)) {

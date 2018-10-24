@@ -46,6 +46,18 @@ Node* Path::getAndRemoveNextNode()
 	}
 }
 
+void Path::removeNode(Node * pNode)
+{
+	auto nodeIter = mNodes.begin();
+	while (nodeIter != mNodes.end()) {
+		if ((*nodeIter)->getId() == pNode->getId()) {
+			mNodes.erase(nodeIter);
+			return;
+		}
+		++nodeIter;
+	}
+}
+
 void Path::addNode(Node* pNode)
 {
 	mNodes.push_back(pNode);
