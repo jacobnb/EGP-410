@@ -9,25 +9,12 @@ or click on the "Local Windows Debugger" button at the top of the screen
 but you may have to retarget projects for your windows SDK version
 
 # Keyboard Inputs
-* Left Click = player travels to click location
-* Enter = Spawn an enemy unit that wanders and chases the player
-* D = Delete a random enemy unit
-* Esc = Quit the game
-* A = Spawn 10 boids
-* R Decrement Cohesion Factor
-* T Increment Cohesion Factor
-* F Decrement Separation Factor
-* G Increment Separation Factor
-* V Decrement Alignment Factor
-* B Increment Alignment Factor
-* Y Decrement Wander Factor
-* U Increment Wander Factor
-* H Decrement Cohesion Radius
-* J Increment Cohesion Radius
-* N Decrement Alignment Radius
-* M Increment Alignment Radius
-* I Decrement Separation Radius
-* O Increment Separation Radius
+* Left Click = Pathfind to click location
+* F = Swap to DFS pathfinder
+* A = Swap to A* pathfinder
+* D = Swap to Dijkstra pathfinder
+* ESC = quit game
+
 
 # Student Version
 Code modified and accidentally obfuscated by Jacob B.
