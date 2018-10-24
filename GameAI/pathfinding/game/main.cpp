@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
 	bool shouldExit = false;
 
-	while( !shouldExit )
+	while (!shouldExit)
 	{
 		gpGame->beginLoop();
 		gpGame->processLoop();
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 	delete gpGame;
 	delete gpPerformanceTracker;
 
-	MemoryTracker::getInstance()->reportAllocations( std::cout );
+	MemoryTracker::getInstance()->reportAllocations(std::cout);
 
 	system("pause");
 

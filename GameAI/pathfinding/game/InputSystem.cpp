@@ -21,7 +21,7 @@ InputSystem::InputSystem()
 
 InputSystem::~InputSystem()
 {
-	
+
 }
 
 void InputSystem::update()
@@ -36,7 +36,7 @@ void InputSystem::update()
 		GameMessage * pMessage = NULL;
 		switch (nextEvent.type)
 		{
-		case SDL_KEYDOWN: 
+		case SDL_KEYDOWN:
 			pMessage = new KeydownMessage(KeyType(nextEvent.key.keysym.scancode));
 			static_cast<GameApp*>(gpGame)->getMessageManager()->addMessage(pMessage, 0);
 			break;
@@ -63,8 +63,8 @@ void InputSystem::clearQueue()
 void InputSystem::updateMouseEvents()
 {
 	if (SDL_GetMouseState(&mXMouse, &mYMouse) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-		if (mXMouse != mPrevX && mYMouse != mPrevY) { 
-			
+		if (mXMouse != mPrevX && mYMouse != mPrevY) {
+
 			Vector2D pos(mXMouse, mYMouse);
 			Vector2D prevPos(mPrevX, mPrevY);
 
@@ -74,6 +74,6 @@ void InputSystem::updateMouseEvents()
 			mPrevY = mYMouse;
 		}
 	}
-	
+
 }
 

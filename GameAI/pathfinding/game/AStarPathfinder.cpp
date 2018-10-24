@@ -37,15 +37,13 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 
 #ifdef VISUALIZE_PATH
 	delete mpPath;
-	mVisitedNodes.clear(); //This list seems useless, it is closed list rather than a visualization
+	mVisitedNodes.clear(); //This list is only useful for numNodes Processed
 	mVisitedNodes.push_back(pFrom);
 #endif
 
-	//create path?
 	Path* pPath = new Path();
 	//this is for visualization but also acts as the closed list because that's how it's done in the depth first pathfinder
 
-	//current node to get connections from?
 	Node* pCurrentNode = nullptr;
 	//end node added.
 	bool toNodeAdded = false;
@@ -60,7 +58,8 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 		//get connections from current Node
 		std::vector<Connection*> connections = mpGraph->getConnections(pCurrentNode->getId());
 
-		for (unsigned int i = 0; i < connections.size(); i++) { //for each neighbor of current node
+		for (unsigned int i = 0; i < connections.size(); i++) { 
+			//for each neighbor of current node
 			Connection* pConnection = connections[i];
 
 			//set up node.
@@ -127,9 +126,6 @@ Path * AStarPathfinder::findPath(Node * pFrom, Node * pTo)
 	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 #ifdef VISUALIZE_PATH
-	if (pPath->getNumNodes() == 0) {
-		std::cout << "No Nodes in Path";
-	}
 	mpPath = pPath;
 
 #endif

@@ -10,9 +10,9 @@
 
 using namespace std;
 
-GridPathfinder::GridPathfinder( GridGraph* pGraph )
-:Pathfinder(pGraph)
-,mTimeElapsed(0.0)
+GridPathfinder::GridPathfinder(GridGraph* pGraph)
+	:Pathfinder(pGraph)
+	, mTimeElapsed(0.0)
 {
 #ifdef VISUALIZE_PATH
 	mpVisualizer = NULL;
@@ -44,21 +44,21 @@ float lerp(int value, int start, int end)
 
 
 #ifdef VISUALIZE_PATH
-void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
+void GridPathfinder::drawVisualization(Grid* pGrid, GraphicsBuffer* pDest)
 {
-	//cout << "mpPath:" << mpPath << endl;
 	delete mpVisualizer;
-	mpVisualizer = new GridVisualizer( pGrid );
-	static Color pathColor = Color(255,64,64);
+	mpVisualizer = new GridVisualizer(pGrid);
+	static Color pathColor = Color(255, 64, 64);
 	static Color visitedColor = GREEN_COLOR;
-	static Color startColor = Color(1,255,128);
-	static Color stopColor = Color(1,128,255);
+	static Color startColor = Color(1, 255, 128);
+	static Color stopColor = Color(1, 128, 255);
 
-	if( mpPath != NULL && mpPath->getNumNodes() > 0)
+	if (mpPath != NULL && mpPath->getNumNodes() > 0)
 	{
 		Color currentPathColor = pathColor;
 		int unsigned numNodes = mpPath->getNumNodes(); //when this is unsigned it fails the for statement later.
 
+		//this left in b/c it's dean's code
 		/*for( int i=1; i<numNodes-1; i++ )
 		{
 			mpVisualizer->addColor( mpPath->peekNode(i)->getId(), pathColor );
@@ -76,7 +76,7 @@ void GridPathfinder::drawVisualization( Grid* pGrid, GraphicsBuffer* pDest )
 
 		//add beginning and ending color
 		mpVisualizer->addColor(mpPath->peekNode(0)->getId(), startColor);
-		mpVisualizer->addColor( mpPath->peekNode( mpPath->getNumNodes()-1 )->getId(), stopColor );
+		mpVisualizer->addColor(mpPath->peekNode(mpPath->getNumNodes() - 1)->getId(), stopColor);
 	}
 
 	mpVisualizer->draw(*pDest);

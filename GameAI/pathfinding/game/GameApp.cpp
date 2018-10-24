@@ -30,11 +30,11 @@ const int GRID_SQUARE_SIZE = 32;
 const std::string gFileName = "pathgrid.txt";
 
 GameApp::GameApp()
-:mpMessageManager(NULL)
-,mpGrid(NULL)
-,mpGridGraph(NULL)
-,mpPathfinder(NULL)
-,mpDebugDisplay(NULL)
+	:mpMessageManager(NULL)
+	, mpGrid(NULL)
+	, mpGridGraph(NULL)
+	, mpPathfinder(NULL)
+	, mpDebugDisplay(NULL)
 {
 }
 
@@ -46,7 +46,7 @@ GameApp::~GameApp()
 bool GameApp::init()
 {
 	bool retVal = Game::init();
-	if( retVal == false )
+	if (retVal == false)
 	{
 
 		return false;
@@ -56,9 +56,9 @@ bool GameApp::init()
 	mpInputSystem = new InputSystem();
 	//create and load the Grid, GridBuffer, and GridRenderer
 	mpGrid = new Grid(mpGraphicsSystem->getWidth(), mpGraphicsSystem->getHeight(), GRID_SQUARE_SIZE);
-	mpGridVisualizer = new GridVisualizer( mpGrid );
-	std::ifstream theStream( gFileName );
-	mpGrid->load( theStream );
+	mpGridVisualizer = new GridVisualizer(mpGrid);
+	std::ifstream theStream(gFileName);
+	mpGrid->load(theStream);
 
 	//create the GridGraph for pathfinding
 	mpGridGraph = new GridGraph(mpGrid);
@@ -72,15 +72,15 @@ bool GameApp::init()
 	mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID, "wallpaper.bmp");
 
 	//setup sprites
-	GraphicsBuffer* pBackGroundBuffer = mpGraphicsBufferManager->getBuffer( mBackgroundBufferID );
-	if( pBackGroundBuffer != NULL )
+	GraphicsBuffer* pBackGroundBuffer = mpGraphicsBufferManager->getBuffer(mBackgroundBufferID);
+	if (pBackGroundBuffer != NULL)
 	{
-		mpSpriteManager->createAndManageSprite( BACKGROUND_SPRITE_ID, pBackGroundBuffer, 0, 0, (float)pBackGroundBuffer->getWidth(), (float)pBackGroundBuffer->getHeight() );
+		mpSpriteManager->createAndManageSprite(BACKGROUND_SPRITE_ID, pBackGroundBuffer, 0, 0, (float)pBackGroundBuffer->getWidth(), (float)pBackGroundBuffer->getHeight());
 	}
 
 	//debug display
-	PathfindingDebugContent* pContent = new PathfindingDebugContent( mpPathfinder );
-	mpDebugDisplay = new DebugDisplay( Vector2D(0,12), pContent );
+	PathfindingDebugContent* pContent = new PathfindingDebugContent(mpPathfinder);
+	mpDebugDisplay = new DebugDisplay(Vector2D(0, 12), pContent);
 
 	mpMasterTimer->start();
 	return true;
@@ -121,13 +121,13 @@ void GameApp::processLoop()
 	//get back buffer
 	GraphicsBuffer* pBackBuffer = mpGraphicsSystem->getBackBuffer();
 	//copy to back buffer
-	mpGridVisualizer->draw( *pBackBuffer );
+	mpGridVisualizer->draw(*pBackBuffer);
 #ifdef VISUALIZE_PATH
 	//show pathfinder visualizer
 	mpPathfinder->drawVisualization(mpGrid, pBackBuffer);
 #endif
 
-	mpDebugDisplay->draw( pBackBuffer );
+	mpDebugDisplay->draw(pBackBuffer);
 
 	mpMessageManager->processMessagesForThisframe();
 
