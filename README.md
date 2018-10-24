@@ -1,5 +1,5 @@
-[Github Commit](https://github.com/jacobnb/EGP-410/commit/591007e3b093de243bde4dc5a7c8058f05cd7206)
-[Github Tag](https://github.com/jacobnb/EGP-410/tree/Assignment2)
+[Github Commit](https://github.com/jacobnb/EGP-410/commit/18f5cf95af528e2b427c2c071537549722ded34c)
+[Github Tag](https://github.com/jacobnb/EGP-410/tree/Assignment3)
 
 # To compile and link the project:
 1. open EGP-410\GameAI\component steering SDL\steering.sln using Visual Studio
